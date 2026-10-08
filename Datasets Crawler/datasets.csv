@@ -1,0 +1,18 @@
+id,name,source,url,filename,expected_samples,expected_features,expected_classes
+AUT,Automobile,KEEL,https://sci2s.ugr.es/keel/dataset/data/classification/automobile.zip,AUT_automobile.zip,159,25,6
+BAL,Balance Scale,KEEL,https://sci2s.ugr.es/keel/dataset/data/classification/balance.zip,BAL_balance.zip,625,4,3
+CAR,Car Evaluation,KEEL,https://sci2s.ugr.es/keel/dataset/data/classification/car.zip,CAR_car.zip,1728,6,4
+CLE,Cleveland Heart Disease,KEEL,https://sci2s.ugr.es/keel/dataset/data/classification/cleveland.zip,CLE_cleveland.zip,297,13,5
+DER,Dermatology,KEEL,https://sci2s.ugr.es/keel/dataset/data/classification/dermatology.zip,DER_dermatology.zip,358,34,6
+ECO,Ecoli,KEEL,https://sci2s.ugr.es/keel/dataset/data/classification/ecoli.zip,ECO_ecoli.zip,336,7,8
+FLA,Solar Flare,KEEL,https://sci2s.ugr.es/keel/dataset/data/classification/flare.zip,FLA_flare.zip,1066,11,6
+GLA,Glass Identification,LIBSVM,https://www.csie.ntu.edu.tw/~cjlin/libsvmtools/datasets/multiclass/glass.scale,GLA_glass.scale,214,9,6
+HAY,Hayes-Roth,KEEL,https://sci2s.ugr.es/keel/dataset/data/classification/hayes-roth.zip,HAY_hayes-roth.zip,160,4,3
+HCV,HCV Data,UCI,https://archive.ics.uci.edu/static/public/571/hcv+data.zip,HCV_hcv_data.zip,589,12,5
+LYM,Lymphography,KEEL,https://sci2s.ugr.es/keel/dataset/data/classification/lymphography.zip,LYM_lymphography.zip,148,18,4
+NEW,New-Thyroid,KEEL,https://sci2s.ugr.es/keel/dataset/data/classification/newthyroid.zip,NEW_newthyroid.zip,215,5,3
+SEG,Statlog Segment,LIBSVM,https://www.csie.ntu.edu.tw/~cjlin/libsvmtools/datasets/multiclass/segment.scale,SEG_segment.scale,2310,19,7
+SHU,Statlog Shuttle,KEEL,https://sci2s.ugr.es/keel/dataset/data/imbalanced/shuttle.zip,SHU_shuttle.zip,2175,9,5
+THY,Thyroid,KEEL,https://sci2s.ugr.es/keel/dataset/data/imbalanced/thyroid.zip,THY_thyroid.zip,720,21,3
+VEH,Statlog Vehicle,LIBSVM,https://www.csie.ntu.edu.tw/~cjlin/libsvmtools/datasets/multiclass/vehicle.original,VEH_vehicle.original,846,18,4
+ZOO,Zoo,KEEL,https://sci2s.ugr.es/keel/dataset/data/classification/zoo.zip,ZOO_zoo.zip,101,16,7
