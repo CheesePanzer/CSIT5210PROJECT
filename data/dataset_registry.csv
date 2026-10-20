@@ -1,0 +1,18 @@
+dataset_id,download_date,raw_sample_count,raw_feature_count,final_feature_count,final_class_count,raw_class_counts,computed_ir,imbalance_group,categorical_columns,has_predefined_keel_folds
+AUT,2026-10-20,159,25,64,6,"[20, 3, 48, 46, 29, 13]",16.0,high,"['make', 'fuel-type', 'aspiration', 'num-of-doors', 'body-style', 'drive-wheels', 'engine-location', 'engine-type', 'num-of-cylinders', 'fuel-system']",True
+BAL,2026-10-20,625,4,4,3,"[49, 288, 288]",5.88,medium,[],True
+CAR,2026-10-20,1728,6,21,4,"[384, 69, 1210, 65]",18.62,high,"['Buying', 'Maint', 'Doors', 'Persons', 'Lug_boot', 'Safety']",True
+CLE,2026-10-20,297,13,13,5,"[160, 54, 35, 35, 13]",12.31,high,[],True
+DER,2026-10-20,358,34,130,6,"[111, 60, 71, 48, 48, 20]",5.55,medium,"['a1', 'a2', 'a3', 'a4', 'a5', 'a6', 'a7', 'a8', 'a9', 'a10', 'a11', 'a12', 'a13', 'a14', 'a15', 'a16', 'a17', 'a18', 'a19', 'a20', 'a21', 'a22', 'a23', 'a24', 'a25', 'a26', 'a27', 'a28', 'a29', 'a30', 'a31', 'a32', 'a33']",True
+ECO,2026-10-20,336,7,7,8,"[143, 77, 2, 2, 35, 20, 5, 52]",71.5,high,[],True
+FLA,2026-10-20,1066,11,41,6,"[147, 211, 239, 95, 43, 331]",7.7,medium,"['LargestSpotSize', 'SpotDistribution', 'Activity', 'Evolution', 'Prev24Hour', 'HistComplex', 'BecomeHist', 'Area', 'C-class', 'M-class', 'X-class']",True
+GLA,2026-10-20,214,9,9,6,"[70, 76, 17, 13, 9, 29]",8.44,medium,[],True
+HAY,2026-10-20,160,4,4,3,"[65, 64, 31]",2.1,low,[],True
+HCV,2026-10-20,589,12,13,5,"[526, 7, 20, 12, 24]",75.14,high,['Sex'],False
+LYM,2026-10-20,148,18,46,4,"[4, 61, 81, 2]",40.5,high,"['lymphatics', 'block_of_affere', 'bl_of_lymph_c', 'bl_of_lymph_s', 'by_pass', 'extravasates', 'regeneration_of', 'early_uptake_in', 'changes_in_lym', 'defect_in_node', 'changes_in_node', 'changes_in_stru', 'special_forms', 'dislocation_of', 'exclusion_of_no']",True
+NEW,2026-10-20,215,5,5,3,"[150, 35, 30]",5.0,medium,[],True
+SEG,2026-10-20,2310,19,19,7,"[330, 330, 330, 330, 330, 330, 330]",1.0,low,[],False
+SHU,2026-10-20,2175,9,9,5,"[1706, 2, 6, 338, 123]",853.0,high,[],True
+THY,2026-10-20,720,21,21,3,"[17, 37, 666]",39.18,high,[],True
+VEH,2026-10-20,846,18,18,4,"[212, 217, 218, 199]",1.1,low,[],False
+ZOO,2026-10-20,101,16,36,7,"[41, 20, 5, 13, 4, 8, 10]",10.25,high,"['Hair', 'Feathers', 'Eggs', 'Milk', 'Airborne', 'Aquatic', 'Predator', 'Toothed', 'Backbone', 'Breathes', 'Venomous', 'Fins', 'Legs', 'Tail', 'Domestic', 'Catsize']",True
