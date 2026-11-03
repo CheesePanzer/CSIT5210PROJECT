@@ -198,7 +198,7 @@ def run_experiment(dataset_id, loss_name, criterion, args):
         # 写回样本的原始位置，才能在五折完成后合并计算总体指标。
         all_predictions[test_idx] = predictions
         fold_ids[test_idx] = fold
-        metrics = evaluate(y[test_idx], predictions, k)
+        metrics = PaperEvaluation(k).evaluate(y[test_idx], predictions)
         fold_results.append({
             "fold": fold, "seed": SEED + fold, "best_lr": best["lr"],
             "refit_epochs": best["best_epoch"], "trials": trials, "test_metrics": metrics,
