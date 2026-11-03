@@ -1,0 +1,12 @@
+{
+  "description": "Versions at result-check time; split versions are also in each original JSON.",
+  "python": "3.11.8 (tags/v3.11.8:db85d51, Feb  6 2024, 22:03:32) [MSC v.1937 64 bit (AMD64)]",
+  "packages": {
+    "torch": "2.7.1+cu118",
+    "skorch": "1.4.0",
+    "numpy": "1.26.4",
+    "pandas": "2.2.3",
+    "scipy": "1.13.1",
+    "scikit-learn": "1.5.2"
+  }
+}

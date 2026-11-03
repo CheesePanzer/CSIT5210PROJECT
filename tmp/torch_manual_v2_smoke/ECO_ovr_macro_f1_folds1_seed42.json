@@ -1,0 +1,287 @@
+{
+  "implementation": "pytorch_manual_author_batch_losses_v2",
+  "loss_reference": "https://www.csie.ntu.edu.tw/~cjlin/papers/ovo-ovr/ovo-ovr-code.zip",
+  "loss_reference_file": "multi_class_nn/ovo_loss.py",
+  "loss_profile": "author_code_batch_counts_pair_average",
+  "ovr_reduction": "mean_over_batch_and_classes",
+  "dataset": "ECO",
+  "loss": "ovr",
+  "criterion": "macro_f1",
+  "class_labels": [
+    "cp",
+    "im",
+    "imL",
+    "imS",
+    "imU",
+    "om",
+    "omL",
+    "pp"
+  ],
+  "seed": 42,
+  "split_config": {
+    "outer_method": "keel_predefined",
+    "outer_n_splits": 5,
+    "inner_n_splits": 5,
+    "inner_fold": 1,
+    "shuffle_generated_folds": true,
+    "seed": 42,
+    "data_dir": "D:\\CSIT5210PROJECT\\data\\raw",
+    "sklearn_version": "1.5.2",
+    "pandas_version": "2.2.3",
+    "dataset_sha256": "3db260597c12345051a2f565bb1daed59d963ac58db4897239fcdc5dda1749a4"
+  },
+  "learning_rates": [
+    0.001
+  ],
+  "batch_size": 8,
+  "max_epochs": 2,
+  "patience": 10,
+  "optimizer": "torch.optim.Adam",
+  "adam_betas": [
+    0.9,
+    0.999
+  ],
+  "adam_eps": 1e-08,
+  "device": "cuda",
+  "torch_version": "2.7.1+cu118",
+  "refit_policy": "inner_best_epoch_on_all_outer_training_samples",
+  "missing_class_metric_policy": "all_dataset_classes_zero_division_0",
+  "ovo_batch_scaling": "sum(pair_loss / (batch_n_y + batch_n_j)) / C(k,2)",
+  "selected_folds": [
+    1
+  ],
+  "complete_five_fold_run": false,
+  "evaluated_samples": 68,
+  "total_samples": 336,
+  "combined_test_metrics": {
+    "accuracy": 0.7058823529411765,
+    "macro_f1": 0.27915103551056064,
+    "g_mean": 0.0,
+    "ba": 0.3186520376175549,
+    "per_class_recall": [
+      0.9310344827586207,
+      0.8,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.8181818181818182
+    ],
+    "confusion_matrix": [
+      [
+        27,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        2
+      ],
+      [
+        3,
+        12,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        5,
+        0,
+        0,
+        0,
+        0,
+        0,
+        2
+      ],
+      [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        4
+      ],
+      [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1
+      ],
+      [
+        2,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        9
+      ]
+    ]
+  },
+  "fold_results": [
+    {
+      "fold": 1,
+      "seed": 43,
+      "best_lr": 0.001,
+      "refit_epochs": 2,
+      "trials": [
+        {
+          "lr": 0.001,
+          "val_score": 0.16003787878787878,
+          "best_epoch": 2,
+          "history": [
+            {
+              "epoch": 1,
+              "train_loss": 0.3095050387293379,
+              "val_score": 0.07467532467532467
+            },
+            {
+              "epoch": 2,
+              "train_loss": 0.270079404951256,
+              "val_score": 0.16003787878787878
+            }
+          ]
+        }
+      ],
+      "test_metrics": {
+        "accuracy": 0.7058823529411765,
+        "macro_f1": 0.27915103551056064,
+        "g_mean": 0.0,
+        "ba": 0.3186520376175549,
+        "per_class_recall": [
+          0.9310344827586207,
+          0.8,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.8181818181818182
+        ],
+        "confusion_matrix": [
+          [
+            27,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            2
+          ],
+          [
+            3,
+            12,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            1,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            5,
+            0,
+            0,
+            0,
+            0,
+            0,
+            2
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            4
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            1
+          ],
+          [
+            2,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            9
+          ]
+        ]
+      },
+      "inner_input_dim": 7,
+      "refit_input_dim": 7,
+      "sample_counts": {
+        "train_val": 268,
+        "inner_train": 214,
+        "inner_val": 54,
+        "test": 68
+      }
+    }
+  ]
+}

@@ -1,0 +1,188 @@
+{
+  "implementation": "pytorch_manual_author_batch_losses_v2",
+  "loss_reference": "https://www.csie.ntu.edu.tw/~cjlin/papers/ovo-ovr/ovo-ovr-code.zip",
+  "loss_reference_file": "multi_class_nn/ovo_loss.py",
+  "loss_profile": "author_code_batch_counts_pair_average",
+  "ovr_reduction": "mean_over_batch_and_classes",
+  "dataset": "SHU",
+  "loss": "ovo",
+  "criterion": "macro_f1",
+  "class_labels": [
+    "1",
+    "2",
+    "3",
+    "4",
+    "5"
+  ],
+  "seed": 42,
+  "split_config": {
+    "outer_method": "keel_predefined",
+    "outer_n_splits": 5,
+    "inner_n_splits": 5,
+    "inner_fold": 1,
+    "shuffle_generated_folds": true,
+    "seed": 42,
+    "data_dir": "D:\\CSIT5210PROJECT\\data\\raw",
+    "sklearn_version": "1.5.2",
+    "pandas_version": "2.2.3",
+    "dataset_sha256": "28cc249f6e7745367e7151212a2e8347233af9c4b9a4ca7ab85690140299403b"
+  },
+  "learning_rates": [
+    0.001
+  ],
+  "batch_size": 8,
+  "max_epochs": 2,
+  "patience": 10,
+  "optimizer": "torch.optim.Adam",
+  "adam_betas": [
+    0.9,
+    0.999
+  ],
+  "adam_eps": 1e-08,
+  "device": "cuda",
+  "torch_version": "2.7.1+cu118",
+  "refit_policy": "inner_best_epoch_on_all_outer_training_samples",
+  "missing_class_metric_policy": "all_dataset_classes_zero_division_0",
+  "ovo_batch_scaling": "sum(pair_loss / (batch_n_y + batch_n_j)) / C(k,2)",
+  "selected_folds": [
+    1
+  ],
+  "complete_five_fold_run": false,
+  "evaluated_samples": 435,
+  "total_samples": 2175,
+  "combined_test_metrics": {
+    "accuracy": 0.9425287356321839,
+    "macro_f1": 0.5462815634728468,
+    "g_mean": 0.0,
+    "ba": 0.5294117647058824,
+    "per_class_recall": [
+      1.0,
+      0.0,
+      0.0,
+      0.6470588235294118,
+      1.0
+    ],
+    "confusion_matrix": [
+      [
+        342,
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0,
+        1
+      ],
+      [
+        24,
+        0,
+        0,
+        44,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0,
+        24
+      ]
+    ]
+  },
+  "fold_results": [
+    {
+      "fold": 1,
+      "seed": 43,
+      "best_lr": 0.001,
+      "refit_epochs": 1,
+      "trials": [
+        {
+          "lr": 0.001,
+          "val_score": 0.5298736774392205,
+          "best_epoch": 1,
+          "history": [
+            {
+              "epoch": 1,
+              "train_loss": 0.10438388025645039,
+              "val_score": 0.5298736774392205
+            },
+            {
+              "epoch": 2,
+              "train_loss": 0.04059578936838748,
+              "val_score": 0.518118171683389
+            }
+          ]
+        }
+      ],
+      "test_metrics": {
+        "accuracy": 0.9425287356321839,
+        "macro_f1": 0.5462815634728468,
+        "g_mean": 0.0,
+        "ba": 0.5294117647058824,
+        "per_class_recall": [
+          1.0,
+          0.0,
+          0.0,
+          0.6470588235294118,
+          1.0
+        ],
+        "confusion_matrix": [
+          [
+            342,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            1
+          ],
+          [
+            24,
+            0,
+            0,
+            44,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            24
+          ]
+        ]
+      },
+      "inner_input_dim": 9,
+      "refit_input_dim": 9,
+      "sample_counts": {
+        "train_val": 1740,
+        "inner_train": 1392,
+        "inner_val": 348,
+        "test": 435
+      }
+    }
+  ]
+}

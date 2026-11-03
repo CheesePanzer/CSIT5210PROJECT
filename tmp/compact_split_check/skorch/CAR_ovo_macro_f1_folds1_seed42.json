@@ -1,0 +1,140 @@
+{
+  "implementation": "skorch_with_composed_torch_losses",
+  "dataset": "CAR",
+  "loss": "ovo",
+  "criterion": "macro_f1",
+  "seed": 42,
+  "split_config": {
+    "outer_method": "keel_predefined",
+    "outer_n_splits": 5,
+    "inner_n_splits": 5,
+    "inner_fold": 1,
+    "shuffle_generated_folds": true,
+    "seed": 42,
+    "data_dir": "D:\\CSIT5210PROJECT\\data\\raw",
+    "sklearn_version": "1.5.2",
+    "pandas_version": "2.2.3",
+    "dataset_sha256": "1eee558b41638610a8a63ced85f28153a182ea85a12fcd351cd57cf6eb263f3b"
+  },
+  "class_labels": [
+    "acc",
+    "good",
+    "unacc",
+    "vgood"
+  ],
+  "selected_folds": [
+    1
+  ],
+  "max_epochs": 1,
+  "batch_size": 8,
+  "patience": 10,
+  "learning_rates": [
+    0.001
+  ],
+  "optimizer": "torch.optim.Adam",
+  "adam_betas": [
+    0.9,
+    0.999
+  ],
+  "adam_eps": 1e-08,
+  "device": "cuda",
+  "refit_policy": "inner_best_epoch_on_all_outer_training_samples",
+  "missing_class_metric_policy": "all_dataset_classes_zero_division_0",
+  "ovo_batch_scaling": "2 * N_train * batch_mean(weighted_pair_loss)",
+  "complete_five_fold_run": false,
+  "evaluated_samples": 346,
+  "total_samples": 1728,
+  "combined_test_metrics": {
+    "accuracy": 0.8815028901734104,
+    "macro_f1": 0.7056976937411719,
+    "g_mean": 0.5719346234791004,
+    "ba": 0.629302515666152,
+    "confusion_matrix": [
+      [
+        54,
+        0,
+        23,
+        0
+      ],
+      [
+        9,
+        4,
+        1,
+        0
+      ],
+      [
+        2,
+        0,
+        240,
+        0
+      ],
+      [
+        6,
+        0,
+        0,
+        7
+      ]
+    ]
+  },
+  "fold_results": [
+    {
+      "fold": 1,
+      "best_lr": 0.001,
+      "refit_epochs": 1,
+      "trials": [
+        {
+          "lr": 0.001,
+          "score": 0.40125448984672285,
+          "epochs": 1,
+          "history": [
+            {
+              "epoch": 1,
+              "train_loss": 4.2380196515251605,
+              "val_score": 0.40125448984672285
+            }
+          ]
+        }
+      ],
+      "inner_input_dim": 21,
+      "refit_input_dim": 21,
+      "sample_counts": {
+        "train_val": 1382,
+        "inner_train": 1105,
+        "inner_val": 277,
+        "test": 346
+      },
+      "test_metrics": {
+        "accuracy": 0.8815028901734104,
+        "macro_f1": 0.7056976937411719,
+        "g_mean": 0.5719346234791004,
+        "ba": 0.629302515666152,
+        "confusion_matrix": [
+          [
+            54,
+            0,
+            23,
+            0
+          ],
+          [
+            9,
+            4,
+            1,
+            0
+          ],
+          [
+            2,
+            0,
+            240,
+            0
+          ],
+          [
+            6,
+            0,
+            0,
+            7
+          ]
+        ]
+      }
+    }
+  ]
+}

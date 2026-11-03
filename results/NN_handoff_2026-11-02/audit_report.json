@@ -1,0 +1,13 @@
+{
+  "source_directory": "D:\\CSIT5210PROJECT\\results\\neural_network_skorch",
+  "expected_experiments": 102,
+  "found_json": 102,
+  "found_predictions_csv": 102,
+  "validated_experiments": 102,
+  "validated_folds": 510,
+  "validated_lr_trials": 4080,
+  "checked_history_epochs": 97785,
+  "missing_experiments": [],
+  "issues": [],
+  "passed": true
+}
