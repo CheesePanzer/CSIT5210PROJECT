@@ -121,7 +121,11 @@ def fit_and_select_lr(X_train, y_train, X_val, y_val, k, loss_name, criterion, a
     for lr in LEARNING_RATES:
         seed_everything(seed)  # 每个学习率使用相同初始化。
         model = PaperMLP(X_train.shape[1], k).to(args.device)
-        loss_fn = PaperLoss(loss_name, k).to(args.device)
+        loss_fn = PaperLoss(
+            loss_name,
+            k,
+            class_counts=np.bincount(y_train, minlength=k),
+        ).to(args.device)
         optimizer = torch.optim.Adam(model.parameters(), lr=lr)
         train_loader = make_loader(X_train, y_train, BATCH_SIZE, shuffle=True)
         # waiting 记录连续未提升轮数；best_epoch 供之后全量重训使用。
@@ -178,8 +182,12 @@ def run_experiment(dataset_id, loss_name, criterion, args):
         X_refit, X_test = preprocess_partition(X, train_val_idx, test_idx, meta["categorical_cols"])
         seed_everything(SEED + fold)
         model = PaperMLP(X_refit.shape[1], k).to(args.device)
-        # OVO 在每个 batch 内自行计数，不传入完整训练集的类别频数。
-        loss_fn = PaperLoss(loss_name, k).to(args.device)
+        # 提供class counts 以应对oi或者oj的计数
+        loss_fn = PaperLoss(
+            loss_name,
+            k,
+            class_counts=np.bincount(y[train_val_idx], minlength=k),
+        ).to(args.device)
         optimizer = torch.optim.Adam(model.parameters(), lr=best["lr"])
         train_loader = make_loader(X_refit, y[train_val_idx], BATCH_SIZE, shuffle=True)
         # 论文未明确全量重训如何早停；这里复用内层最佳 epoch 数。

@@ -1,10 +1,4 @@
-"""Paper-inspired CE, OVR, and OVO loss implementations.
-
-The OVR/OVO objectives follow the paper's pairwise formulations, while the
-training code adapts the class counts and reduction to the current mini-batch.
-They should therefore not be described as mathematically identical to the
-paper's full-dataset objective without an additional equivalence proof.
-"""
+"""CE, OVR, and OVO losses for the paper's mini-batch training setup."""
 
 import torch
 from torch import nn
@@ -14,7 +8,7 @@ from torch.nn import functional as F
 class PaperLoss(nn.Module):
     """CE, OVR, and OVO losses based on the paper's definitions."""
 
-    def __init__(self, name, num_classes):
+    def __init__(self, name, num_classes, class_counts):
         super().__init__()
         if name not in ("ce", "ovr", "ovo"):
             raise ValueError(f"Unknown loss: {name}")
@@ -23,6 +17,10 @@ class PaperLoss(nn.Module):
         self.name = name
         self.num_classes = num_classes
         self.num_pairs = num_classes * (num_classes - 1) // 2
+        class_counts = torch.as_tensor(class_counts, dtype=torch.float64)
+        if class_counts.shape != (num_classes,) or torch.any(class_counts <= 0):
+            raise ValueError("class_counts must contain one positive count per class.")
+        self.register_buffer("class_counts", class_counts)
 
     def forward(self, logits, targets):
         self._validate_inputs(logits, targets)
@@ -74,10 +72,9 @@ class PaperLoss(nn.Module):
         - O_i = samples whose target is class i;
         - p_i,j(x_n) = exp(f_i)/(exp(f_i)+exp(f_j)), paper Eq. (10).
 
-        The pairwise probability and class-pair weighting correspond to
-        paper Eqs. (10)-(12). The current code uses current-mini-batch counts
-        and averages over C(K,2) unordered pairs; this is the explicit
-        mini-batch adaptation used by this training pipeline.
+        The pairwise probability follows Eq. (10), while the class-pair
+        denominator uses fixed counts from the complete training partition.
+        Training still uses mini-batches of size 8.
         """
         # targets_one_hot[n, i] is 1{y_n=i}; it later removes the invalid
         # self-comparison i=j from the K-way comparison matrix.
@@ -86,9 +83,9 @@ class PaperLoss(nn.Module):
             num_classes=self.num_classes,
         ).bool()
 
-        # counts[i] = n_i, the number of class-i samples in this mini-batch.
-        # In the paper's full-dataset notation this role is played by |O_i|.
-        counts = torch.bincount(targets, minlength=self.num_classes).to(logits.dtype)
+        # counts[i] = |O_i| from the complete training partition, not the
+        # number of class-i samples in this mini-batch.
+        counts = self.class_counts.to(device=logits.device, dtype=logits.dtype)
 
         # true_class_logits[n, 0] = f_{y_n}(x_n).
         true_class_logits = logits.gather(1, targets[:, None])
@@ -101,8 +98,7 @@ class PaperLoss(nn.Module):
         # log-likelihood term in Eqs. (11) and (12).
         pairwise_loss = -F.logsigmoid(pairwise_logits)
 
-        # pair_counts[n, j] = n_{y_n} + n_j, corresponding to
-        # |O_{y_n}| + |O_j| in the paper's pairwise normalization.
+        # pair_counts[n, j] = |O_{y_n}| + |O_j| from Eq. (11)/(12).
         pair_counts = counts[targets, None] + counts[None, :]
 
         # Apply the 1/(|O_i|+|O_j|) pairwise weight from Eqs. (11)-(13).
@@ -111,7 +107,6 @@ class PaperLoss(nn.Module):
         # Remove j=y_n because a class must not be compared with itself.
         weighted_loss = weighted_loss.masked_fill(targets_one_hot, 0.0)
 
-        # Average over the fixed number C(K,2) of unordered class pairs.
-        # This is the mini-batch reduction used here; the paper's Eq. (11)
-        # is written as a full-dataset objective over ordered pairs.
-        return weighted_loss.sum() / self.num_pairs
+        # Keep batch size=8; this is the stochastic batch estimate of the
+        # paper objective with fixed full-training class counts.
+        return 2.0 * weighted_loss.sum() / len(targets)
