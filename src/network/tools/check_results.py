@@ -1,6 +1,6 @@
 """核对正式结果的覆盖、参数、划分、训练历史及 JSON/预测 CSV 的指标一致性。
 
-不重新训练模型。运行：python -m src.network.check_results
+不重新训练模型。运行：python -m src.network.tools.check_results
 """
 
 import argparse
@@ -15,11 +15,12 @@ import numpy as np
 import pandas as pd
 
 from src.datasets import load_dataset
-from src.network.reproduce_split import INDEX_FIELDS, dataset_fingerprint, sample_counts
+from src.network.split_metadata import INDEX_FIELDS, dataset_fingerprint, sample_counts
 from src.split import get_inner_subsets, get_outer_folds
 
 
-ROOT = Path(__file__).resolve().parents[2]
+ROOT = Path(__file__).resolve().parents[3]
+NETWORK_DIR = ROOT / "src" / "network"
 METRICS = ("accuracy", "macro_f1", "g_mean", "ba")
 RATES = [1e-5, 5e-5, 1e-4, 5e-4, 1e-3, 5e-3, 1e-2, 5e-2]
 
@@ -171,9 +172,9 @@ def audit(results_dir, data_dir):
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--results", type=Path, default=ROOT / "results" / "neural_network_skorch")
+    parser.add_argument("--results", type=Path, default=NETWORK_DIR / "results" / "neural_network_torch_manual_v2")
     parser.add_argument("--data-dir", type=Path, default=ROOT / "data" / "raw")
-    parser.add_argument("--output", type=Path, default=ROOT / "tmp" / "nn_handoff" / "audit_data.json")
+    parser.add_argument("--output", type=Path, default=NETWORK_DIR / "results" / "audit_report.json")
     args = parser.parse_args()
     report = audit(args.results, args.data_dir)
     args.output.parent.mkdir(parents=True, exist_ok=True)

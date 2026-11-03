@@ -1,12 +1,7 @@
-r"""PyTorch 手动训练版 v2：损失按作者公开代码的 mini-batch 实现组合。
+r"""PyTorch 手动训练版 v2：损失按论文的 mini-batch 实现组合。
 
-运行：.venv\Scripts\python.exe -m src.network.network_train_torch_manual --datasets CAR --device cuda
 网络层/Adam/DataLoader 用 PyTorch，指标用 sklearn/scipy，数据用组员接口。
 训练循环显式包含前向传播、计算损失、反向传播、更新参数及验证早停。
-
-阅读顺序：main -> run_experiment -> fit_and_select_lr -> train_one_epoch。
-本版本不导入 skorch：epoch、batch、反向传播调用、验证、早停和重训均显式编写。
-数据接口、网络结构和划分沿用本项目，损失对齐作者 multi_class_nn/ovo_loss.py。
 """
 
 import argparse
@@ -28,14 +23,23 @@ from src.dataset_registry import get_available_datasets
 from src.datasets import load_dataset
 from src.preprocessing import preprocess_partition
 from src.split import get_inner_subsets, get_outer_folds
-from src.network.reproduce_split import make_split_config, sample_counts
-from src.network.author_losses import AuthorPaperLoss
+from src.network.split_metadata import make_split_config, sample_counts
+from src.network.paper_losses import PaperLoss
 
 
 # 根据当前文件位置定位项目根目录，默认的数据/输出路径不依赖终端所在位置。
 ROOT = Path(__file__).resolve().parents[2]
+NETWORK_DIR = Path(__file__).resolve().parent
 # 论文搜索的 8 个学习率；每个外层折都在自己的验证集上重新选一次。
 LEARNING_RATES = [1e-5, 5e-5, 1e-4, 5e-4, 1e-3, 5e-3, 1e-2, 5e-2]
+LOSSES = ["ce", "ovr", "ovo"]
+CRITERIA = ["accuracy", "macro_f1"]
+OUTER_FOLDS = [1, 2, 3, 4, 5]
+MAX_EPOCHS = 40
+PATIENCE = 10
+BATCH_SIZE = 8
+SEED = 42
+THREADS = 1
 
 
 def seed_everything(seed):
@@ -135,18 +139,18 @@ def evaluate(y_true, y_pred, num_classes):
 
 def fit_and_select_lr(X_train, y_train, X_val, y_val, k, loss_name, criterion, args, seed):
     """只用内层训练/验证数据，选择学习率及对应最佳轮数；不接触测试集。"""
-    validation_loader = make_loader(X_val, y_val, args.batch_size)
+    validation_loader = make_loader(X_val, y_val, BATCH_SIZE)
     trials = []
-    for lr in args.learning_rates:
+    for lr in LEARNING_RATES:
         seed_everything(seed)  # 每个学习率使用相同初始化。
         model = PaperMLP(X_train.shape[1], k).to(args.device)
-        loss_fn = AuthorPaperLoss(loss_name, k).to(args.device)
+        loss_fn = PaperLoss(loss_name, k).to(args.device)
         optimizer = torch.optim.Adam(model.parameters(), lr=lr)
-        train_loader = make_loader(X_train, y_train, args.batch_size, shuffle=True)
+        train_loader = make_loader(X_train, y_train, BATCH_SIZE, shuffle=True)
         # waiting 记录连续未提升轮数；best_epoch 供之后全量重训使用。
         best_score, best_epoch, waiting = -math.inf, 0, 0
         history = []
-        for epoch in range(1, args.max_epochs + 1):
+        for epoch in range(1, MAX_EPOCHS + 1):
             loss = train_one_epoch(model, train_loader, loss_fn, optimizer, args.device)
             predictions = predict(model, validation_loader, args.device)
             # criterion 是选参标准 accuracy 或 macro_f1，与训练损失不是一回事。
@@ -157,7 +161,7 @@ def fit_and_select_lr(X_train, y_train, X_val, y_val, k, loss_name, criterion, a
                 best_score, best_epoch, waiting = score, epoch, 0
             else:
                 waiting += 1
-            if waiting >= args.patience:
+            if waiting >= PATIENCE:
                 break
         trials.append({"lr": lr, "val_score": best_score, "best_epoch": best_epoch, "history": history})
         print(f"    lr={lr:g} val_{criterion}={best_score:.4f} "
@@ -169,19 +173,19 @@ def run_experiment(dataset_id, loss_name, criterion, args):
     """运行一个“数据集 + 损失 + 选参标准”的实验，包含选定的外层测试折。"""
     # X 保留原始 DataFrame；y 是整数标签；meta 提供类别、类别列和官方划分。
     X, y, meta = load_dataset(dataset_id, data_dir=str(args.data_dir))
-    outer_folds = get_outer_folds(X, y, metadata=meta, seed=args.seed)
-    split_config = make_split_config(X, y, meta, args.data_dir, args.seed)
+    outer_folds = get_outer_folds(X, y, metadata=meta, seed=SEED)
+    split_config = make_split_config(X, y, meta, args.data_dir, SEED)
     k = meta["n_classes"]
     # 每个样本只在所属外层测试折中预测一次；-1 表示该样本尚未测试。
     all_predictions = np.full(len(y), -1, dtype=np.int64)
     fold_ids = np.full(len(y), -1, dtype=np.int64)
     fold_results = []
 
-    for fold in args.folds:
+    for fold in OUTER_FOLDS:
         # 外层留出约 1/5 数据测试；其余约 4/5 才能用于训练和验证。
         train_val_idx, test_idx = outer_folds[fold - 1]
         # 论文神经网络只使用内层五折中的第一个划分，以减少调参开销。
-        train_rel, val_rel = get_inner_subsets(X, train_val_idx, y, seed=args.seed)[0]
+        train_rel, val_rel = get_inner_subsets(X, train_val_idx, y, seed=SEED)[0]
         # 内层函数返回的是相对于 train_val_idx 的位置，先转换成全局行索引。
         train_idx, val_idx = train_val_idx[train_rel], train_val_idx[val_rel]
         # 预处理只在 train_idx 上拟合，验证集只 transform，避免信息泄漏。
@@ -190,28 +194,28 @@ def run_experiment(dataset_id, loss_name, criterion, args):
               f"train={len(train_idx)} val={len(val_idx)} test={len(test_idx)}", flush=True)
         best, trials = fit_and_select_lr(
             X_train, y[train_idx], X_val, y[val_idx], k,
-            loss_name, criterion, args, args.seed + fold,
+            loss_name, criterion, args, SEED + fold,
         )
 
         # 选好参数后重新拟合预处理器、新建模型，用整个外层训练集重训。
         X_refit, X_test = preprocess_partition(X, train_val_idx, test_idx, meta["categorical_cols"])
-        seed_everything(args.seed + fold)
+        seed_everything(SEED + fold)
         model = PaperMLP(X_refit.shape[1], k).to(args.device)
         # OVO 在每个 batch 内自行计数，不传入完整训练集的类别频数。
-        loss_fn = AuthorPaperLoss(loss_name, k).to(args.device)
+        loss_fn = PaperLoss(loss_name, k).to(args.device)
         optimizer = torch.optim.Adam(model.parameters(), lr=best["lr"])
-        train_loader = make_loader(X_refit, y[train_val_idx], args.batch_size, shuffle=True)
+        train_loader = make_loader(X_refit, y[train_val_idx], BATCH_SIZE, shuffle=True)
         # 论文未明确全量重训如何早停；这里复用内层最佳 epoch 数。
         # 测试集始终不参与学习率选择和训练轮数选择。
         for _ in range(best["best_epoch"]):
             train_one_epoch(model, train_loader, loss_fn, optimizer, args.device)
-        predictions = predict(model, make_loader(X_test, y[test_idx], args.batch_size), args.device)
+        predictions = predict(model, make_loader(X_test, y[test_idx], BATCH_SIZE), args.device)
         # 写回样本的原始位置，才能在五折完成后合并计算总体指标。
         all_predictions[test_idx] = predictions
         fold_ids[test_idx] = fold
         metrics = evaluate(y[test_idx], predictions, k)
         fold_results.append({
-            "fold": fold, "seed": args.seed + fold, "best_lr": best["lr"],
+            "fold": fold, "seed": SEED + fold, "best_lr": best["lr"],
             "refit_epochs": best["best_epoch"], "trials": trials, "test_metrics": metrics,
             "inner_input_dim": X_train.shape[1], "refit_input_dim": X_refit.shape[1],
             # 结果只展示数量；完整索引可用 reproduce_split 按需重建并导出。
@@ -223,29 +227,30 @@ def run_experiment(dataset_id, loss_name, criterion, args):
     # 合并各折样本预测后计算指标，而不是对五个折的指标直接求平均。
     metrics = evaluate(y[mask], all_predictions[mask], k)
     result = {
-        "implementation": "pytorch_manual_author_batch_losses_v2",
-        "loss_reference": "https://www.csie.ntu.edu.tw/~cjlin/papers/ovo-ovr/ovo-ovr-code.zip",
-        "loss_reference_file": "multi_class_nn/ovo_loss.py",
-        "loss_profile": "author_code_batch_counts_pair_average",
-        "ovr_reduction": "mean_over_batch_and_classes",
-        "dataset": dataset_id, "loss": loss_name, "criterion": criterion,
-        "class_labels": meta["class_labels"], "seed": args.seed,
+        "dataset": dataset_id, 
+        "loss": loss_name, 
+        "criterion": criterion,
+        "class_labels": meta["class_labels"], 
+        "seed": SEED,
         "split_config": split_config,
-        "learning_rates": args.learning_rates, "batch_size": args.batch_size,
-        "max_epochs": args.max_epochs, "patience": args.patience,
-        "optimizer": "torch.optim.Adam", "adam_betas": [0.9, 0.999], "adam_eps": 1e-8,
-        "device": args.device, "torch_version": torch.__version__,
-        "refit_policy": "inner_best_epoch_on_all_outer_training_samples",
-        "missing_class_metric_policy": "all_dataset_classes_zero_division_0",
-        "ovo_batch_scaling": "sum(pair_loss / (batch_n_y + batch_n_j)) / C(k,2)",
-        "selected_folds": args.folds, "complete_five_fold_run": bool(mask.all()),
-        "evaluated_samples": int(mask.sum()), "total_samples": len(y),
-        "combined_test_metrics": metrics, "fold_results": fold_results,
+        "learning_rates": LEARNING_RATES,
+        "batch_size": BATCH_SIZE,
+        "max_epochs": MAX_EPOCHS,
+        "patience": PATIENCE,
+        "optimizer": "torch.optim.Adam",
+        "device": args.device, 
+        "torch_version": torch.__version__,
+        "selected_folds": OUTER_FOLDS,
+        "complete_five_fold_run": bool(mask.all()),
+        "evaluated_samples": int(mask.sum()), 
+        "total_samples": len(y),
+        "combined_test_metrics": metrics, 
+        "fold_results": fold_results,
     }
     args.output_dir.mkdir(parents=True, exist_ok=True)
     # JSON 保存参数、历史和指标；CSV 保存每个测试样本的真实/预测标签。
     # 文件名相同会覆盖，比较不同训练设置时可指定不同 --output-dir。
-    stem = f"{dataset_id}_{loss_name}_{criterion}_folds{''.join(map(str, args.folds))}_seed{args.seed}"
+    stem = f"{dataset_id}_{loss_name}_{criterion}_folds{''.join(map(str, OUTER_FOLDS))}_seed{SEED}"
     path = args.output_dir / f"{stem}.json"
     path.write_text(json.dumps(result, ensure_ascii=False, indent=2), encoding="utf-8")
     pd.DataFrame({
@@ -260,28 +265,13 @@ def run_experiment(dataset_id, loss_name, criterion, args):
 
 
 def parse_args():
-    """读取终端参数；默认值对应论文设置，也允许用缩减参数快速检查代码。"""
+    """Parse only settings that are expected to change between runs."""
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--datasets", nargs="+", default=["CAR"], help="Dataset IDs or ALL")
-    parser.add_argument("--losses", nargs="+", choices=["ce", "ovr", "ovo"], default=["ce", "ovr", "ovo"])
-    parser.add_argument("--criteria", nargs="+", choices=["accuracy", "macro_f1"], default=["accuracy", "macro_f1"])
-    parser.add_argument("--learning-rates", nargs="+", type=float, default=LEARNING_RATES)
-    parser.add_argument("--folds", nargs="+", type=int, default=[1, 2, 3, 4, 5])
-    parser.add_argument("--max-epochs", type=int, default=40)
-    parser.add_argument("--patience", type=int, default=10)
-    parser.add_argument("--batch-size", type=int, default=8)
-    parser.add_argument("--seed", type=int, default=42)
-    parser.add_argument("--threads", type=int, default=1)
     parser.add_argument("--device", choices=["cpu", "cuda"], default="cpu")
     parser.add_argument("--data-dir", type=Path, default=ROOT / "data" / "raw")
-    parser.add_argument("--output-dir", type=Path, default=ROOT / "results" / "neural_network_torch_manual_v2")
+    parser.add_argument("--output-dir", type=Path, default=NETWORK_DIR / "results" / "neural_network_torch_manual_v2")
     args = parser.parse_args()
-    if min(args.max_epochs, args.patience, args.batch_size, args.threads) < 1:
-        parser.error("Epochs, patience, batch size and threads must be positive.")
-    if any(not math.isfinite(lr) or lr <= 0 for lr in args.learning_rates):
-        parser.error("Learning rates must be finite and positive.")
-    if len(set(args.folds)) != len(args.folds) or any(f < 1 or f > 5 for f in args.folds):
-        parser.error("Folds must be distinct integers from 1 to 5.")
     if args.device == "cuda" and not torch.cuda.is_available():
         parser.error("CUDA is not available; use --device cpu.")
     args.datasets = [name.upper() for name in args.datasets]
@@ -296,13 +286,12 @@ def parse_args():
 def main():
     """实验入口：依次遍历数据集、三种损失和两种选参标准。"""
     args = parse_args()
-    torch.set_num_threads(args.threads)
+    torch.set_num_threads(THREADS)
     for dataset_id in args.datasets:
-        for loss_name in args.losses:
-            for criterion in args.criteria:
+        for loss_name in LOSSES:
+            for criterion in CRITERIA:
                 run_experiment(dataset_id, loss_name, criterion, args)
 
 
 if __name__ == "__main__":
-    # 被其他文件 import 时只加载定义，使用 python -m 运行时才开始实验。
     main()

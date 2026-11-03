@@ -1,11 +1,10 @@
 #  """按结果 JSON 复现数据划分，需要时才导出完整样本归属。
 #
-# 运行：python -m src.network.reproduce_split --report <结果.json> --fold 1
+# 运行：python -m src.network.tools.reproduce_split --report <结果.json> --fold 1
 # 这里只重建划分，不训练模型，也不修改原来的结果文件。
 # """
 
 import argparse
-import hashlib
 import json
 from pathlib import Path
 
@@ -15,46 +14,14 @@ import sklearn
 
 from src.datasets import load_dataset
 from src.split import get_inner_subsets, get_outer_folds
+from src.network.split_metadata import (
+    INDEX_FIELDS,
+    dataset_fingerprint,
+)
 
 
-ROOT = Path(__file__).resolve().parents[2]
-INDEX_FIELDS = {
-    "train_val": "train_val_indices", "test": "test_indices",
-    "inner_train": "inner_train_indices", "inner_val": "inner_val_indices",
-}
-
-
-def dataset_fingerprint(X, y, metadata):
-    """检查加载后的特征、标签及顺序；不把原始数据长列表写入报告。"""
-    digest = hashlib.sha256()
-    digest.update(pd.util.hash_pandas_object(X, index=True).to_numpy(dtype="<u8").tobytes())
-    digest.update(np.asarray(y, dtype="<i8").tobytes())
-    digest.update(json.dumps({"columns": list(X.columns), "labels": metadata["class_labels"]},
-                             ensure_ascii=False).encode("utf-8"))
-    # KEEL 划分来自官方文件，除数据顺序之外也记录官方测试折的边界。
-    for _, test_idx in metadata.get("predefined_folds") or []:
-        digest.update(np.asarray([len(test_idx)], dtype="<i8").tobytes())
-        digest.update(np.asarray(test_idx, dtype="<i8").tobytes())
-    return digest.hexdigest()
-
-
-def make_split_config(X, y, metadata, data_dir, seed):
-    """保存足以重建当前划分的规则；这是划分 seed，不是 seed+fold 的网络 seed。"""
-    return {
-        "outer_method": "keel_predefined" if metadata.get("has_predefined_folds") else "stratified_kfold",
-        "outer_n_splits": 5, "inner_n_splits": 5, "inner_fold": 1,
-        "shuffle_generated_folds": True, "seed": int(seed),
-        "data_dir": str(Path(data_dir).resolve()),
-        "sklearn_version": sklearn.__version__, "pandas_version": pd.__version__,
-        "dataset_sha256": dataset_fingerprint(X, y, metadata),
-    }
-
-
-def sample_counts(train_val_idx, test_idx, train_idx, val_idx):
-    return {"train_val": len(train_val_idx), "inner_train": len(train_idx),
-            "inner_val": len(val_idx), "test": len(test_idx)}
-
-
+ROOT = Path(__file__).resolve().parents[3]
+NETWORK_DIR = ROOT / "src" / "network"
 def reconstruct_split(report_path, fold, data_dir=None):
     """返回分区索引、整数标签、元数据；同时兼容以前保存索引的旧报告。"""
     report = json.loads(Path(report_path).read_text(encoding="utf-8"))
@@ -121,7 +88,7 @@ def main():
         partitions, y, meta = reconstruct_split(args.report, args.fold, args.data_dir)
     except (ValueError, FileNotFoundError) as error:
         parser.error(str(error))
-    output = args.output or ROOT / "results" / "splits" / f"{args.report.stem}_fold{args.fold}_membership.csv"
+    output = args.output or NETWORK_DIR / "results" / "splits" / f"{args.report.stem}_fold{args.fold}_membership.csv"
     export_membership(partitions, y, meta, output)
     print("Sample counts:", {name: len(values) for name, values in partitions.items()})
     print("sample_index is the zero-based row position returned by load_dataset, not a raw-file line number.")

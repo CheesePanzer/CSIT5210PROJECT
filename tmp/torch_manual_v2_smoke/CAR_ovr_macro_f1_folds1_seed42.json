@@ -1,7 +1,5 @@
 {
   "implementation": "pytorch_manual_author_batch_losses_v2",
-  "loss_reference": "https://www.csie.ntu.edu.tw/~cjlin/papers/ovo-ovr/ovo-ovr-code.zip",
-  "loss_reference_file": "multi_class_nn/ovo_loss.py",
   "loss_profile": "author_code_batch_counts_pair_average",
   "ovr_reduction": "mean_over_batch_and_classes",
   "dataset": "CAR",

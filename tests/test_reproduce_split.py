@@ -9,9 +9,8 @@ from unittest.mock import patch
 import numpy as np
 import pandas as pd
 
-from src.network.reproduce_split import (
-    INDEX_FIELDS, export_membership, make_split_config, reconstruct_split, sample_counts,
-)
+from src.network.tools.reproduce_split import export_membership, reconstruct_split
+from src.network.split_metadata import INDEX_FIELDS, make_split_config, sample_counts
 from src.split import get_inner_subsets, get_outer_folds
 
 
@@ -42,7 +41,7 @@ class SplitReproductionTests(unittest.TestCase):
 
     def reconstruct(self, X=None, y=None):
         self.write_report()
-        with patch("src.network.reproduce_split.load_dataset", return_value=(
+        with patch("src.network.tools.reproduce_split.load_dataset", return_value=(
             self.X if X is None else X, self.y if y is None else y, self.meta
         )):
             return reconstruct_split(self.report_path, 1)

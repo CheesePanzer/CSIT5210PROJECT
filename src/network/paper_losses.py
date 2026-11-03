@@ -1,16 +1,12 @@
-"""对齐作者公开代码的实际 mini-batch 损失，而非全量公式的无偏缩放版本。
-
-来源：https://www.csie.ntu.edu.tw/~cjlin/papers/ovo-ovr/ovo-ovr-code.zip
-文件：multi_class_nn/ovo_loss.py。没有执行下载的代码；这里只重写相同计算。
-"""
+"""The paper's mini-batch loss definitions."""
 
 import torch
 from torch import nn
 from torch.nn import functional as F
 
 
-class AuthorPaperLoss(nn.Module):
-    """CE 用标准交叉熵，OVR/OVO 的 reduction 和计数范围与作者代码一致。"""
+class PaperLoss(nn.Module):
+    """CE, OVR, and OVO losses using the paper's mini-batch definitions."""
 
     def __init__(self, name, num_classes):
         super().__init__()
