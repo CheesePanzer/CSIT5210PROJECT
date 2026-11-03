@@ -13,8 +13,6 @@ from pathlib import Path
 import numpy as np
 import pandas as pd
 import torch
-from scipy.stats import gmean
-from sklearn.metrics import accuracy_score, confusion_matrix, f1_score, recall_score
 from torch import nn
 from torch.utils.data import DataLoader, TensorDataset
 
@@ -25,9 +23,9 @@ from src.preprocessing import preprocess_partition
 from src.split import get_inner_subsets, get_outer_folds
 from src.network.split_metadata import make_split_config, sample_counts
 from src.network.paper_losses import PaperLoss
+from src.network.evaluation import PaperEvaluation
 
 
-# 根据当前文件位置定位项目根目录，默认的数据/输出路径不依赖终端所在位置。
 ROOT = Path(__file__).resolve().parents[2]
 NETWORK_DIR = Path(__file__).resolve().parent
 # 论文搜索的 8 个学习率；每个外层折都在自己的验证集上重新选一次。
@@ -43,7 +41,6 @@ THREADS = 1
 
 
 def seed_everything(seed):
-    """固定随机来源，便于复现实验；不保证不同硬件/库版本完全一致。"""
     random.seed(seed)
     np.random.seed(seed)
     torch.manual_seed(seed)
@@ -85,7 +82,7 @@ def make_loader(X, y, batch_size, shuffle=False):
 
 
 def train_one_epoch(model, loader, loss_fn, optimizer, device):
-    """完整遍历训练集一次；梯度计算和 Adam 内部更新仍由 PyTorch 完成。"""
+    """完整遍历训练集一次"""
     model.train()
     total_loss = 0.0
     for features, targets in loader:
@@ -116,30 +113,10 @@ def predict(model, loader, device):
     return np.concatenate(outputs)
 
 
-def evaluate(y_true, y_pred, num_classes):
-    """调用库计算四个论文指标；输出为 0~1 的小数，而非百分数。
-
-    Accuracy：整体正确率；Macro-F1：各类 F1 的等权平均；
-    G-mean：各类 recall 的几何平均（某类为 0 时结果为 0）；
-    BA：各类 recall 的算术平均，避免多数类单独主导整体评价。
-    """
-    # 即使某个折缺少某类，也保留数据集全部 k 类；零分母按 0 处理。
-    labels = list(range(num_classes))
-    recalls = recall_score(y_true, y_pred, labels=labels, average=None, zero_division=0)
-    return {
-        "accuracy": float(accuracy_score(y_true, y_pred)),
-        "macro_f1": float(f1_score(y_true, y_pred, labels=labels, average="macro", zero_division=0)),
-        "g_mean": float(gmean(recalls)),
-        # BA 就是各类 recall 的宏平均。显式保留全部 k 类，包括缺失类别。
-        "ba": float(recall_score(y_true, y_pred, labels=labels, average="macro", zero_division=0)),
-        "per_class_recall": recalls.tolist(),
-        "confusion_matrix": confusion_matrix(y_true, y_pred, labels=labels).tolist(),
-    }
-
-
 def fit_and_select_lr(X_train, y_train, X_val, y_val, k, loss_name, criterion, args, seed):
     """只用内层训练/验证数据，选择学习率及对应最佳轮数；不接触测试集。"""
     validation_loader = make_loader(X_val, y_val, BATCH_SIZE)
+    evaluator = PaperEvaluation(k)
     trials = []
     for lr in LEARNING_RATES:
         seed_everything(seed)  # 每个学习率使用相同初始化。
@@ -154,7 +131,7 @@ def fit_and_select_lr(X_train, y_train, X_val, y_val, k, loss_name, criterion, a
             loss = train_one_epoch(model, train_loader, loss_fn, optimizer, args.device)
             predictions = predict(model, validation_loader, args.device)
             # criterion 是选参标准 accuracy 或 macro_f1，与训练损失不是一回事。
-            score = evaluate(y_val, predictions, k)[criterion]
+            score = evaluator.score(y_val, predictions, criterion)
             history.append({"epoch": epoch, "train_loss": loss, "val_score": score})
             if score > best_score:
                 # 只有严格提升才重置等待计数；相同分数保留较早的 epoch。
@@ -225,7 +202,7 @@ def run_experiment(dataset_id, loss_name, criterion, args):
 
     mask = all_predictions >= 0
     # 合并各折样本预测后计算指标，而不是对五个折的指标直接求平均。
-    metrics = evaluate(y[mask], all_predictions[mask], k)
+    metrics = PaperEvaluation(k).evaluate(y[mask], all_predictions[mask])
     result = {
         "dataset": dataset_id, 
         "loss": loss_name, 

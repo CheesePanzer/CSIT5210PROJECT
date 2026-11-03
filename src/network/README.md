@@ -8,10 +8,12 @@ This directory contains the neural-network reproduction pipeline for the OVO/OVR
 src/network/
 ├── network_train_torch_manual.py   # Main training entry point
 ├── paper_losses.py                 # CE, OVR, and OVO losses
+├── evaluation.py                   # Shared validation/final metric logic
 ├── split_metadata.py               # Shared split metadata helpers
 ├── tools/
 │   ├── check_results.py            # Result-audit tool
-│   └── reproduce_split.py          # Split inspection/export tool
+│   ├── reproduce_split.py          # Split inspection/export tool
+│   └── evaluate_predictions.py     # Offline CSV evaluation tool
 └── archive/                        # Previous implementations; not for final runs
 ```
 
@@ -249,6 +251,19 @@ python -m src.network.tools.reproduce_split `
 ```
 
 It does not train a model or modify the original result report.
+
+### Evaluate a Saved Prediction CSV
+
+`tools/evaluate_predictions.py` evaluates an existing prediction CSV without retraining a model. It uses the same `PaperEvaluation` class as the training script, so validation selection and final CSV evaluation share the same Accuracy/Macro-F1/G-mean/BA definitions.
+
+Example:
+
+```powershell
+python -m src.network.tools.evaluate_predictions `
+  --predictions src/network/results/neural_network_torch_manual_v2/CAR_ovo_macro_f1_folds12345_seed42_predictions.csv `
+  --num-classes 4 `
+  --output src/network/results/analysis/CAR_ovo_macro_f1_metrics.json
+```
 
 ## Archive
 
