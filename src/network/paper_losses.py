@@ -1,4 +1,4 @@
-"""CE, OVR, and OVO losses for the paper's mini-batch training setup."""
+"""CE, OVR, and OVO losses matching the paper implementation behavior."""
 
 import torch
 from torch import nn
@@ -6,9 +6,9 @@ from torch.nn import functional as F
 
 
 class PaperLoss(nn.Module):
-    """CE, OVR, and OVO losses based on the paper's definitions."""
+    """CE, OVR, and OVO losses using the paper implementation's reductions."""
 
-    def __init__(self, name, num_classes, class_counts):
+    def __init__(self, name, num_classes):
         super().__init__()
         if name not in ("ce", "ovr", "ovo"):
             raise ValueError(f"Unknown loss: {name}")
@@ -17,10 +17,6 @@ class PaperLoss(nn.Module):
         self.name = name
         self.num_classes = num_classes
         self.num_pairs = num_classes * (num_classes - 1) // 2
-        class_counts = torch.as_tensor(class_counts, dtype=torch.float64)
-        if class_counts.shape != (num_classes,) or torch.any(class_counts <= 0):
-            raise ValueError("class_counts must contain one positive count per class.")
-        self.register_buffer("class_counts", class_counts)
 
     def forward(self, logits, targets):
         self._validate_inputs(logits, targets)
@@ -72,9 +68,9 @@ class PaperLoss(nn.Module):
         - O_i = samples whose target is class i;
         - p_i,j(x_n) = exp(f_i)/(exp(f_i)+exp(f_j)), paper Eq. (10).
 
-        The pairwise probability follows Eq. (10), while the class-pair
-        denominator uses fixed counts from the complete training partition.
-        Training still uses mini-batches of size 8.
+        The pairwise probability follows Eq. (10). The class-pair denominator
+        and reduction follow the paper implementation: counts are computed
+        from this mini-batch and the result is averaged over C(K,2) pairs.
         """
         # targets_one_hot[n, i] is 1{y_n=i}; it later removes the invalid
         # self-comparison i=j from the K-way comparison matrix.
@@ -83,9 +79,8 @@ class PaperLoss(nn.Module):
             num_classes=self.num_classes,
         ).bool()
 
-        # counts[i] = |O_i| from the complete training partition, not the
-        # number of class-i samples in this mini-batch.
-        counts = self.class_counts.to(device=logits.device, dtype=logits.dtype)
+        # The paper implementation computes n_i from the current mini-batch.
+        counts = torch.bincount(targets, minlength=self.num_classes).to(dtype=logits.dtype)
 
         # true_class_logits[n, 0] = f_{y_n}(x_n).
         true_class_logits = logits.gather(1, targets[:, None])
@@ -98,7 +93,7 @@ class PaperLoss(nn.Module):
         # log-likelihood term in Eqs. (11) and (12).
         pairwise_loss = -F.logsigmoid(pairwise_logits)
 
-        # pair_counts[n, j] = |O_{y_n}| + |O_j| from Eq. (11)/(12).
+        # pair_counts[n, j] = n_{y_n} + n_j for the current mini-batch.
         pair_counts = counts[targets, None] + counts[None, :]
 
         # Apply the 1/(|O_i|+|O_j|) pairwise weight from Eqs. (11)-(13).
@@ -107,6 +102,5 @@ class PaperLoss(nn.Module):
         # Remove j=y_n because a class must not be compared with itself.
         weighted_loss = weighted_loss.masked_fill(targets_one_hot, 0.0)
 
-        # Keep batch size=8; this is the stochastic batch estimate of the
-        # paper objective with fixed full-training class counts.
-        return 2.0 * weighted_loss.sum() / len(targets)
+        # Match the paper implementation: average over unordered class pairs.
+        return weighted_loss.sum() / self.num_pairs

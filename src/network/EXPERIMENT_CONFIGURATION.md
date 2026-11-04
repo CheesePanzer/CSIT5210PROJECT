@@ -97,16 +97,16 @@ src/network/paper_losses.py
 
 The paper does not fully specify early stopping during final refitting. This implementation uses the best epoch selected on the inner validation split and retrains on the complete outer training portion for that number of epochs.
 
-## OVO Class-Count Scaling
+## OVO Loss Scaling
 
-Training still uses mini-batches of size 8. The OVO loss uses class counts
-from the complete training partition:
+Training uses mini-batches of size 8. The OVO loss follows the paper
+implementation and computes class counts from the current mini-batch:
 
 ```text
-sum(pair_loss / (|O_y| + |O_j|)) / C(k,2)
+sum(pair_loss / (batch_n_y + batch_n_j)) / C(k,2)
 ```
 
-Here, `|O_y|` and `|O_j|` are fixed counts from the complete training partition. The mini-batch supplies the current examples and gradients, while the denominator does not change with the batch.
+Here, `batch_n_y` and `batch_n_j` are the current mini-batch class counts, and `C(k,2)` is the number of unordered class pairs. This follows the paper implementation rather than the full-dataset reduction written in Equation (12).
 
 This reduction must be validated using the paper equations and small hand-calculated test cases before the final full run.
 
