@@ -1,0 +1,1033 @@
+{
+  "passed": true,
+  "expected_experiments": 102,
+  "found_experiments": 102,
+  "validated_folds": 510,
+  "issues": [],
+  "missing_experiments": [],
+  "validation_scope": "Coverage, labels, fold membership, metrics recomputed from predictions, finite histories and selected hyperparameters. This does not verify paper equivalence of the loss.",
+  "training_source_commit": "69c0524",
+  "loss_source_sha256": "d40af94fc014da277984574973ec26856473856b9b1c793500415e73c3c233d2",
+  "source_manifest": [
+    {
+      "path": "neural_network_torch_manual_v2/AUT_ce_accuracy_folds12345_seed42.json",
+      "bytes": 170941,
+      "sha256": "11a6a1f461e582aa2384cfad92ffd3cf15e290f3bed402fd8dddc15ed90f69dc"
+    },
+    {
+      "path": "neural_network_torch_manual_v2/AUT_ce_accuracy_folds12345_seed42_predictions.csv",
+      "bytes": 1672,
+      "sha256": "02286168ed4c8ec3c7fc531a8e05a203aab3c4d16b0620d1a8ec2a18d7dddb5e"
+    },
+    {
+      "path": "neural_network_torch_manual_v2/AUT_ce_macro_f1_folds12345_seed42.json",
+      "bytes": 188101,
+      "sha256": "34e875d9124b6335a0d4853a28742d125ea2ffae6ee74e48310974a8c00dc040"
+    },
+    {
+      "path": "neural_network_torch_manual_v2/AUT_ce_macro_f1_folds12345_seed42_predictions.csv",
+      "bytes": 1672,
+      "sha256": "6d2abbb5262e13db7ffeda40cefc4e5ddf33b54e58e66d3af80bbc741a39cfad"
+    },
+    {
+      "path": "neural_network_torch_manual_v2/AUT_ovo_accuracy_folds12345_seed42.json",
+      "bytes": 172922,
+      "sha256": "690a53b674fa06c167f88ebd7cfb12dd7cbf466babe32528df0a62fbe5ab41f9"
+    },
+    {
+      "path": "neural_network_torch_manual_v2/AUT_ovo_accuracy_folds12345_seed42_predictions.csv",
+      "bytes": 1672,
+      "sha256": "b40488036b3241dd1ecc9455ecaff33bed18a2b5a9b64b1ac9dc647721c36542"
+    },
+    {
+      "path": "neural_network_torch_manual_v2/AUT_ovo_macro_f1_folds12345_seed42.json",
+      "bytes": 195388,
+      "sha256": "287dfc1efbab5dc952e83389a448f93bd4ade19f1d7a1816401fa0e9d6dbe38b"
+    },
+    {
+      "path": "neural_network_torch_manual_v2/AUT_ovo_macro_f1_folds12345_seed42_predictions.csv",
+      "bytes": 1672,
+      "sha256": "d634a7c168aa540de0b4b0fe9ad77afa48305688d6e4279a85d0eb35fbda963f"
+    },
+    {
+      "path": "neural_network_torch_manual_v2/AUT_ovr_accuracy_folds12345_seed42.json",
+      "bytes": 158865,
+      "sha256": "a9e29b5b9c1185b135dcdd945cd5118d28e03de0ac6b77e7ac31661845e266bf"
+    },
+    {
+      "path": "neural_network_torch_manual_v2/AUT_ovr_accuracy_folds12345_seed42_predictions.csv",
+      "bytes": 1672,
+      "sha256": "94f4a5e879768761a306838aa4b169d5102c5965b9a5310a8c5e66628ce6335e"
+    },
+    {
+      "path": "neural_network_torch_manual_v2/AUT_ovr_macro_f1_folds12345_seed42.json",
+      "bytes": 185887,
+      "sha256": "6cc9e85d5502bc5e6db6c3b85f2acb0a9d263838a1e3adee908f4c52f3d0acc5"
+    },
+    {
+      "path": "neural_network_torch_manual_v2/AUT_ovr_macro_f1_folds12345_seed42_predictions.csv",
+      "bytes": 1672,
+      "sha256": "9d08464ba947b1823f5c109972e1bc524207ece3d443ac897de332dbf0d6d2d1"
+    },
+    {
+      "path": "neural_network_torch_manual_v2/BAL_ce_accuracy_folds12345_seed42.json",
+      "bytes": 162345,
+      "sha256": "c2625efdd377cb5d1d821ce8fd654b9b5a113f71810bd0c5d877b1e9f59de11a"
+    },
+    {
+      "path": "neural_network_torch_manual_v2/BAL_ce_accuracy_folds12345_seed42_predictions.csv",
+      "bytes": 6798,
+      "sha256": "b35c776ec82d03c0ffdd7cbf21194cf1d2ee795084c84418182286119584de32"
+    },
+    {
+      "path": "neural_network_torch_manual_v2/BAL_ce_macro_f1_folds12345_seed42.json",
+      "bytes": 189650,
+      "sha256": "43d6b24803978a6f2a3ab9e9cbe63fb3bd526e2c46a519d9788cda4ab4af4551"
+    },
+    {
+      "path": "neural_network_torch_manual_v2/BAL_ce_macro_f1_folds12345_seed42_predictions.csv",
+      "bytes": 6798,
+      "sha256": "400d82fc65625fbe0bd6fe0a6e55e2c38d327be0d20f3a8862147fffda88a49f"
+    },
+    {
+      "path": "neural_network_torch_manual_v2/BAL_ovo_accuracy_folds12345_seed42.json",
+      "bytes": 151139,
+      "sha256": "9cffc5ed9cf20cd0e284ec68a014888876f424b5d5768b6bfa6ec31a0645bba1"
+    },
+    {
+      "path": "neural_network_torch_manual_v2/BAL_ovo_accuracy_folds12345_seed42_predictions.csv",
+      "bytes": 6798,
+      "sha256": "872b475e575467e43a50dc22f912f533d97197f09548ed6da74803f6da8965e6"
+    },
+    {
+      "path": "neural_network_torch_manual_v2/BAL_ovo_macro_f1_folds12345_seed42.json",
+      "bytes": 179278,
+      "sha256": "cb0614bb9e65d756dfbf6aa4874785b92a9edf98898873f21a9c57440f596592"
+    },
+    {
+      "path": "neural_network_torch_manual_v2/BAL_ovo_macro_f1_folds12345_seed42_predictions.csv",
+      "bytes": 6798,
+      "sha256": "4741b4bef5ed5c6249e9c23c32c14f66ffba7627f454413f57fb19ae8cce190f"
+    },
+    {
+      "path": "neural_network_torch_manual_v2/BAL_ovr_accuracy_folds12345_seed42.json",
+      "bytes": 146776,
+      "sha256": "55dc19a525c73d87dd82aaa9c6ae02a6662cf94a261f3a42131ccbc749175594"
+    },
+    {
+      "path": "neural_network_torch_manual_v2/BAL_ovr_accuracy_folds12345_seed42_predictions.csv",
+      "bytes": 6798,
+      "sha256": "4f2217d6030d947a213af6e140b44c3122cb0d27b06e3ef0f9cb56ce52fd6c6b"
+    },
+    {
+      "path": "neural_network_torch_manual_v2/BAL_ovr_macro_f1_folds12345_seed42.json",
+      "bytes": 174125,
+      "sha256": "deb2156199a66a917dfa6f95d95a0802b71d691d22ba020c4e41eb6a4f9b012b"
+    },
+    {
+      "path": "neural_network_torch_manual_v2/BAL_ovr_macro_f1_folds12345_seed42_predictions.csv",
+      "bytes": 6798,
+      "sha256": "d269c7b9a35906cfb532e699758739da3fe782b7e43391e8de8da5b04f0954b9"
+    },
+    {
+      "path": "neural_network_torch_manual_v2/CAR_ce_accuracy_folds12345_seed42.json",
+      "bytes": 192370,
+      "sha256": "ecd374a9edb33a3846cb18cde3977b324575da6e80ecaee8a4edb16f9432d54e"
+    },
+    {
+      "path": "neural_network_torch_manual_v2/CAR_ce_accuracy_folds12345_seed42_predictions.csv",
+      "bytes": 19659,
+      "sha256": "761c9ee45f816d780453338e139a6137fb98441ba4e15ff776b0f9c4b704cc92"
+    },
+    {
+      "path": "neural_network_torch_manual_v2/CAR_ce_macro_f1_folds12345_seed42.json",
+      "bytes": 196266,
+      "sha256": "4070d1489dcfcdb22346c628cc97d63873309f86867c76b935a9c275fae18c49"
+    },
+    {
+      "path": "neural_network_torch_manual_v2/CAR_ce_macro_f1_folds12345_seed42_predictions.csv",
+      "bytes": 19659,
+      "sha256": "9b76030c43c717768fac18f5ea65b3ad56691680e0890b56b59f54b83c6e1eda"
+    },
+    {
+      "path": "neural_network_torch_manual_v2/CAR_ovo_accuracy_folds12345_seed42.json",
+      "bytes": 215625,
+      "sha256": "5547cedc3afe5ab0b3b63148bb3e49580958a0127eb7b2559c9bee99bfb59464"
+    },
+    {
+      "path": "neural_network_torch_manual_v2/CAR_ovo_accuracy_folds12345_seed42_predictions.csv",
+      "bytes": 19659,
+      "sha256": "f94f8421c388c013a8032cca2b547d07a24e7c8b4d6249c1081d573fd1cc6f4f"
+    },
+    {
+      "path": "neural_network_torch_manual_v2/CAR_ovo_macro_f1_folds12345_seed42.json",
+      "bytes": 205896,
+      "sha256": "675358c1a263fadbbbb4589e289334419b6eddc787b1fb26d2b3863d6c79b59d"
+    },
+    {
+      "path": "neural_network_torch_manual_v2/CAR_ovo_macro_f1_folds12345_seed42_predictions.csv",
+      "bytes": 19659,
+      "sha256": "f94f8421c388c013a8032cca2b547d07a24e7c8b4d6249c1081d573fd1cc6f4f"
+    },
+    {
+      "path": "neural_network_torch_manual_v2/CAR_ovr_accuracy_folds12345_seed42.json",
+      "bytes": 197134,
+      "sha256": "46444c3ff403117e18dfbae2b94990f2f3eca458efa8c6b45ddb4cbbb41bc756"
+    },
+    {
+      "path": "neural_network_torch_manual_v2/CAR_ovr_accuracy_folds12345_seed42_predictions.csv",
+      "bytes": 19659,
+      "sha256": "602c51a0a38f503c33099df2330a34e3d16880cfc37fb30e0722c6b28f70179c"
+    },
+    {
+      "path": "neural_network_torch_manual_v2/CAR_ovr_macro_f1_folds12345_seed42.json",
+      "bytes": 199300,
+      "sha256": "c648070fc625d3177fdf436313a876e4c79e9ac6bfc772d3cf53438f970ee178"
+    },
+    {
+      "path": "neural_network_torch_manual_v2/CAR_ovr_macro_f1_folds12345_seed42_predictions.csv",
+      "bytes": 19659,
+      "sha256": "e0d51fa07087aea30b862d4e9c9af204a23eb75a76ee3018a3bd13f8d520eb00"
+    },
+    {
+      "path": "neural_network_torch_manual_v2/CLE_ce_accuracy_folds12345_seed42.json",
+      "bytes": 117897,
+      "sha256": "f7884240c76ebc8dfa139df50628a220df554c9b418306cb90f1698bbc75ae5c"
+    },
+    {
+      "path": "neural_network_torch_manual_v2/CLE_ce_accuracy_folds12345_seed42_predictions.csv",
+      "bytes": 3190,
+      "sha256": "562f673770b23a77374329bcdbf95b4aa4bd559bbfda3b8d650de1e0871842f5"
+    },
+    {
+      "path": "neural_network_torch_manual_v2/CLE_ce_macro_f1_folds12345_seed42.json",
+      "bytes": 123469,
+      "sha256": "b168da3deddf0da3fbe6b70332713eda7f70dba931fa52dd79ac0b0768003ebe"
+    },
+    {
+      "path": "neural_network_torch_manual_v2/CLE_ce_macro_f1_folds12345_seed42_predictions.csv",
+      "bytes": 3190,
+      "sha256": "3466ca522e8810e4777f0aba6ce7b6891f77f7a4b10194cc363e3e15d6820b18"
+    },
+    {
+      "path": "neural_network_torch_manual_v2/CLE_ovo_accuracy_folds12345_seed42.json",
+      "bytes": 119910,
+      "sha256": "9350c0a24f7fc83d73de48ed0a00a020ef7372eb9718e9aeda9b77e62a7e60fe"
+    },
+    {
+      "path": "neural_network_torch_manual_v2/CLE_ovo_accuracy_folds12345_seed42_predictions.csv",
+      "bytes": 3190,
+      "sha256": "de8a4a7945aa6af2e034d368c86aceffb34d0bfb807bb11e1968c6734545351a"
+    },
+    {
+      "path": "neural_network_torch_manual_v2/CLE_ovo_macro_f1_folds12345_seed42.json",
+      "bytes": 135279,
+      "sha256": "19f18cacadc5dc5561614a9194ef5154e4821af6e75dc63251959220698a0b63"
+    },
+    {
+      "path": "neural_network_torch_manual_v2/CLE_ovo_macro_f1_folds12345_seed42_predictions.csv",
+      "bytes": 3190,
+      "sha256": "190c1553e43446ad12d3737198899dda2522fada3132439357660df07a6151e7"
+    },
+    {
+      "path": "neural_network_torch_manual_v2/CLE_ovr_accuracy_folds12345_seed42.json",
+      "bytes": 119435,
+      "sha256": "a9d6d649ac1ad234037b9b1bd44831ec7ecaa56a274096201b4521d4ad52643e"
+    },
+    {
+      "path": "neural_network_torch_manual_v2/CLE_ovr_accuracy_folds12345_seed42_predictions.csv",
+      "bytes": 3190,
+      "sha256": "cfcbd8083302f0e4330b1d5ceaf075df78773e48f1b80478166a67e31c75d766"
+    },
+    {
+      "path": "neural_network_torch_manual_v2/CLE_ovr_macro_f1_folds12345_seed42.json",
+      "bytes": 127931,
+      "sha256": "97f3dc081c7e219a38f22861abe33ba9ceb0529a1a0080dded451829eef59aa1"
+    },
+    {
+      "path": "neural_network_torch_manual_v2/CLE_ovr_macro_f1_folds12345_seed42_predictions.csv",
+      "bytes": 3190,
+      "sha256": "0a9ba79bccd6ff7ae0ea04f2e7fb60210fe1d296ff80cd32e7d39d531274b58f"
+    },
+    {
+      "path": "neural_network_torch_manual_v2/DER_ce_accuracy_folds12345_seed42.json",
+      "bytes": 148593,
+      "sha256": "95dd6f9925370f11eb980ca0c3a31eeebcf3c997e572e88c9af3e3258f96a646"
+    },
+    {
+      "path": "neural_network_torch_manual_v2/DER_ce_accuracy_folds12345_seed42_predictions.csv",
+      "bytes": 3861,
+      "sha256": "fbae749b0960c3e8e706fa8bcb0f1b9b7fa756e9435e6895e61314ff8dfc9f6b"
+    },
+    {
+      "path": "neural_network_torch_manual_v2/DER_ce_macro_f1_folds12345_seed42.json",
+      "bytes": 150600,
+      "sha256": "b61008eaca4d8143423ec0a33338167421acbf894cb731cb958c7deaee066e56"
+    },
+    {
+      "path": "neural_network_torch_manual_v2/DER_ce_macro_f1_folds12345_seed42_predictions.csv",
+      "bytes": 3861,
+      "sha256": "be1b78482128976340c917827e0be3134323d3350782a35c8610604bb4234725"
+    },
+    {
+      "path": "neural_network_torch_manual_v2/DER_ovo_accuracy_folds12345_seed42.json",
+      "bytes": 146346,
+      "sha256": "5edebe3217480925d8b3a0cdd2607ecfe54fce6b6dba5da7aa86a32d3fb12836"
+    },
+    {
+      "path": "neural_network_torch_manual_v2/DER_ovo_accuracy_folds12345_seed42_predictions.csv",
+      "bytes": 3861,
+      "sha256": "505e87e500f8410a7d4399e2f5ec92fd9d65650de3722e0bb4a79093dca3e1fe"
+    },
+    {
+      "path": "neural_network_torch_manual_v2/DER_ovo_macro_f1_folds12345_seed42.json",
+      "bytes": 142863,
+      "sha256": "7d85c075e4a34a9bf0fd83e14b9be444c2f087f57a6723458d4f6de8864efbd5"
+    },
+    {
+      "path": "neural_network_torch_manual_v2/DER_ovo_macro_f1_folds12345_seed42_predictions.csv",
+      "bytes": 3861,
+      "sha256": "04d257bbb1618ffdaa4c60befc8a7f127acbc797e8dfc74630cd4f6e304f89fe"
+    },
+    {
+      "path": "neural_network_torch_manual_v2/DER_ovr_accuracy_folds12345_seed42.json",
+      "bytes": 152039,
+      "sha256": "771fbf168c51dc6fe960f42d7367f89a1186b5a49671ad76ec146d20ddd838ea"
+    },
+    {
+      "path": "neural_network_torch_manual_v2/DER_ovr_accuracy_folds12345_seed42_predictions.csv",
+      "bytes": 3861,
+      "sha256": "79aa120fc9047ff7ebd46a3c655ca379b741618bb8e5f4ae6d3da458a8da3eab"
+    },
+    {
+      "path": "neural_network_torch_manual_v2/DER_ovr_macro_f1_folds12345_seed42.json",
+      "bytes": 148306,
+      "sha256": "2068ad292bd0004f0d3ce0f9ca31f04ffc02d351e1fc792d4448d12fa4a24ae5"
+    },
+    {
+      "path": "neural_network_torch_manual_v2/DER_ovr_macro_f1_folds12345_seed42_predictions.csv",
+      "bytes": 3861,
+      "sha256": "79aa120fc9047ff7ebd46a3c655ca379b741618bb8e5f4ae6d3da458a8da3eab"
+    },
+    {
+      "path": "neural_network_torch_manual_v2/ECO_ce_accuracy_folds12345_seed42.json",
+      "bytes": 167585,
+      "sha256": "a1968dadde638ab6d54562ba2827b0236c2ac2f936dad0c1e939f647b2592597"
+    },
+    {
+      "path": "neural_network_torch_manual_v2/ECO_ce_accuracy_folds12345_seed42_predictions.csv",
+      "bytes": 3619,
+      "sha256": "89cd9e04d7bc8c5a029d0021d174c5f5bbbbdfdf198cecd20d48e9b2399e7383"
+    },
+    {
+      "path": "neural_network_torch_manual_v2/ECO_ce_macro_f1_folds12345_seed42.json",
+      "bytes": 178024,
+      "sha256": "2656d281906c62d8e62186e238d4344bf356269b8e9c16be16e5bb2f7fdb13a4"
+    },
+    {
+      "path": "neural_network_torch_manual_v2/ECO_ce_macro_f1_folds12345_seed42_predictions.csv",
+      "bytes": 3619,
+      "sha256": "e75551b7e58a1afe52ccf2faf88a969d7e1be7ea621603ab6272cab9ecaa39ee"
+    },
+    {
+      "path": "neural_network_torch_manual_v2/ECO_ovo_accuracy_folds12345_seed42.json",
+      "bytes": 171306,
+      "sha256": "2b0c28d6cb5fd3e793345f4f26beec2454b15b2aa3cb2f87d0931af119b4172f"
+    },
+    {
+      "path": "neural_network_torch_manual_v2/ECO_ovo_accuracy_folds12345_seed42_predictions.csv",
+      "bytes": 3619,
+      "sha256": "efc1fbe90eea84e91fe32c63175d4b71a609c29a874be305b7d8fe0c3f39811a"
+    },
+    {
+      "path": "neural_network_torch_manual_v2/ECO_ovo_macro_f1_folds12345_seed42.json",
+      "bytes": 177015,
+      "sha256": "3bf8ce32c9990ec29591abc593a7c9d1bbe0d84912879161d3d82954f03ed214"
+    },
+    {
+      "path": "neural_network_torch_manual_v2/ECO_ovo_macro_f1_folds12345_seed42_predictions.csv",
+      "bytes": 3619,
+      "sha256": "3e19fecfe8a7aca7c90f3014cad8ec5180ae3e165dcd09f0007248067b081595"
+    },
+    {
+      "path": "neural_network_torch_manual_v2/ECO_ovr_accuracy_folds12345_seed42.json",
+      "bytes": 165387,
+      "sha256": "e5068904e6893319bb9c43bba529093e1c609a9e1b5670142f96cc6f2fbd9871"
+    },
+    {
+      "path": "neural_network_torch_manual_v2/ECO_ovr_accuracy_folds12345_seed42_predictions.csv",
+      "bytes": 3619,
+      "sha256": "9326438bbde0db37edd9a8dd3bed4018c45b4b8002bc73b289eca31bf0a8e275"
+    },
+    {
+      "path": "neural_network_torch_manual_v2/ECO_ovr_macro_f1_folds12345_seed42.json",
+      "bytes": 181346,
+      "sha256": "23cf0c0441146c2905f43944dad0b3c5db3b202adf0b323894e513d356df9e29"
+    },
+    {
+      "path": "neural_network_torch_manual_v2/ECO_ovr_macro_f1_folds12345_seed42_predictions.csv",
+      "bytes": 3619,
+      "sha256": "f0196b9b73d37de6c51c8630d27d42f419a7c027f8a214e796ecc2026c291888"
+    },
+    {
+      "path": "neural_network_torch_manual_v2/FLA_ce_accuracy_folds12345_seed42.json",
+      "bytes": 148177,
+      "sha256": "6b4bae85f56d9fcb9ae62f21263299eabee96350da2f63ffe8e59981d2dd4abb"
+    },
+    {
+      "path": "neural_network_torch_manual_v2/FLA_ce_accuracy_folds12345_seed42_predictions.csv",
+      "bytes": 11715,
+      "sha256": "6be9f0f5a23140f55cf3f0b1c24471b37bbb2590e60ea055115ec573e8496aa2"
+    },
+    {
+      "path": "neural_network_torch_manual_v2/FLA_ce_macro_f1_folds12345_seed42.json",
+      "bytes": 183299,
+      "sha256": "395e99d2009b33e1898750fd0ea31812e97cfdd8fbcd21ac5b6a3b86b5b5c20e"
+    },
+    {
+      "path": "neural_network_torch_manual_v2/FLA_ce_macro_f1_folds12345_seed42_predictions.csv",
+      "bytes": 11715,
+      "sha256": "681cfb6831ad4636956eab0fee5685bd3b4009102f431640409493610c81f917"
+    },
+    {
+      "path": "neural_network_torch_manual_v2/FLA_ovo_accuracy_folds12345_seed42.json",
+      "bytes": 141178,
+      "sha256": "edf52f86412454383433d305c71a636101c05d0dc229172fc316de4ca70587b1"
+    },
+    {
+      "path": "neural_network_torch_manual_v2/FLA_ovo_accuracy_folds12345_seed42_predictions.csv",
+      "bytes": 11715,
+      "sha256": "1801af242a5bc557acae8480af3ca55a109fea342e57ff8c77b8be63608ae0bb"
+    },
+    {
+      "path": "neural_network_torch_manual_v2/FLA_ovo_macro_f1_folds12345_seed42.json",
+      "bytes": 173884,
+      "sha256": "21a773bac57408e69a90bda86e053cbedcb78b0eb4b71f868f1eb983bdcd2254"
+    },
+    {
+      "path": "neural_network_torch_manual_v2/FLA_ovo_macro_f1_folds12345_seed42_predictions.csv",
+      "bytes": 11715,
+      "sha256": "e6840625ef070681461afd8094ff34c7e986e553808ad43c8f08121ad7e48194"
+    },
+    {
+      "path": "neural_network_torch_manual_v2/FLA_ovr_accuracy_folds12345_seed42.json",
+      "bytes": 136831,
+      "sha256": "df3d0657545236234040f571551ad8f7e2f5ccaf08e0d1a7d411e5d8e19b8b75"
+    },
+    {
+      "path": "neural_network_torch_manual_v2/FLA_ovr_accuracy_folds12345_seed42_predictions.csv",
+      "bytes": 11715,
+      "sha256": "dc8a2846029af913cf197a0f19e6dfa2d59ee7a1e47cbd48762eb7c92703494d"
+    },
+    {
+      "path": "neural_network_torch_manual_v2/FLA_ovr_macro_f1_folds12345_seed42.json",
+      "bytes": 164936,
+      "sha256": "a2f99ccfb58d239ea606d65fcbe19f94a805dbd535a3d49be30096c9459f1756"
+    },
+    {
+      "path": "neural_network_torch_manual_v2/FLA_ovr_macro_f1_folds12345_seed42_predictions.csv",
+      "bytes": 11715,
+      "sha256": "6b8b47c216622b9dd263a7c55621bf470b5fd9f48ca9abe44a6711df837f9908"
+    },
+    {
+      "path": "neural_network_torch_manual_v2/GLA_ce_accuracy_folds12345_seed42.json",
+      "bytes": 146094,
+      "sha256": "1cb58600837c850aaffa49c8f0f74e94835eae4969d74c852f67a87a0a9ea4cc"
+    },
+    {
+      "path": "neural_network_torch_manual_v2/GLA_ce_accuracy_folds12345_seed42_predictions.csv",
+      "bytes": 2277,
+      "sha256": "75de2119779bc36140dbba732d6484208a86efe3e318f19d8ff19102a87723a9"
+    },
+    {
+      "path": "neural_network_torch_manual_v2/GLA_ce_macro_f1_folds12345_seed42.json",
+      "bytes": 170904,
+      "sha256": "52aa66b043d3d543554335885165b04e1c494dbb15b76b423b9b57c68316601a"
+    },
+    {
+      "path": "neural_network_torch_manual_v2/GLA_ce_macro_f1_folds12345_seed42_predictions.csv",
+      "bytes": 2277,
+      "sha256": "33aba31030d34df6ab1487c94931e02b556e51301b074663b01e294d8476c7a7"
+    },
+    {
+      "path": "neural_network_torch_manual_v2/GLA_ovo_accuracy_folds12345_seed42.json",
+      "bytes": 143554,
+      "sha256": "bee1a4c25e4df657d09a2e1e6d8dd068d0375eb84773cdbf90c75594e15bd868"
+    },
+    {
+      "path": "neural_network_torch_manual_v2/GLA_ovo_accuracy_folds12345_seed42_predictions.csv",
+      "bytes": 2277,
+      "sha256": "6afdd85ecd9c4fb6781f954141d470f4e24096ad650a1b59ccc037d879326002"
+    },
+    {
+      "path": "neural_network_torch_manual_v2/GLA_ovo_macro_f1_folds12345_seed42.json",
+      "bytes": 163893,
+      "sha256": "345c416cf4827d97cb64fe7807268b4d255199c104afbab28a3a15fe2606c3c1"
+    },
+    {
+      "path": "neural_network_torch_manual_v2/GLA_ovo_macro_f1_folds12345_seed42_predictions.csv",
+      "bytes": 2277,
+      "sha256": "7d1225b1651a29d22fae1124f11494ba05d63ff5ef4fa4fe3ef59129c2eb074d"
+    },
+    {
+      "path": "neural_network_torch_manual_v2/GLA_ovr_accuracy_folds12345_seed42.json",
+      "bytes": 147199,
+      "sha256": "ec9430fa19cb75dbb74396ea1e13cd68a734d0e063af85528f01088de631ac7e"
+    },
+    {
+      "path": "neural_network_torch_manual_v2/GLA_ovr_accuracy_folds12345_seed42_predictions.csv",
+      "bytes": 2277,
+      "sha256": "710c23cbcc77f121dbf0ae39daa68505682e666dd55199bfda65d7ef5a7f5166"
+    },
+    {
+      "path": "neural_network_torch_manual_v2/GLA_ovr_macro_f1_folds12345_seed42.json",
+      "bytes": 169837,
+      "sha256": "b8a821c15120b5d47cac355d86a0a4d468ed9d28bd38d1352bc3e5a4a8ed90a1"
+    },
+    {
+      "path": "neural_network_torch_manual_v2/GLA_ovr_macro_f1_folds12345_seed42_predictions.csv",
+      "bytes": 2277,
+      "sha256": "82c8c4715b55b3c32f474148343c8258b8d3b7432e9e93993f98de4974903f44"
+    },
+    {
+      "path": "neural_network_torch_manual_v2/HAY_ce_accuracy_folds12345_seed42.json",
+      "bytes": 156988,
+      "sha256": "308bd0038b4c900c89874f2552457f6bf5719fdb509a25121f8d88bcbbbed347"
+    },
+    {
+      "path": "neural_network_torch_manual_v2/HAY_ce_accuracy_folds12345_seed42_predictions.csv",
+      "bytes": 1683,
+      "sha256": "ad4b1d24c1f983eee91e41cbe09cc217fd8cd63dd63c725e009087fbf8f03444"
+    },
+    {
+      "path": "neural_network_torch_manual_v2/HAY_ce_macro_f1_folds12345_seed42.json",
+      "bytes": 178454,
+      "sha256": "8a299b4464e71cc084fd52a8b337614b7fad61ac3d3e8e1fbdfbf58d1879e295"
+    },
+    {
+      "path": "neural_network_torch_manual_v2/HAY_ce_macro_f1_folds12345_seed42_predictions.csv",
+      "bytes": 1683,
+      "sha256": "6beaabf4b020317ab708b1924f05d28e9965ed72e4cdcfe02402b22f386046bc"
+    },
+    {
+      "path": "neural_network_torch_manual_v2/HAY_ovo_accuracy_folds12345_seed42.json",
+      "bytes": 165934,
+      "sha256": "86c07107609c2cc6fd316eead79d4a6d6eb77ef784953a03fec554550644b562"
+    },
+    {
+      "path": "neural_network_torch_manual_v2/HAY_ovo_accuracy_folds12345_seed42_predictions.csv",
+      "bytes": 1683,
+      "sha256": "a2516799c836dafc33c3fb2dd350b3bb73f6dcd45a2f38a24b4ad07ca935a7a8"
+    },
+    {
+      "path": "neural_network_torch_manual_v2/HAY_ovo_macro_f1_folds12345_seed42.json",
+      "bytes": 172970,
+      "sha256": "f95a4e0502b5ed5831e59d939f4a52a1fbed30f7489cda4b72a9a57711650059"
+    },
+    {
+      "path": "neural_network_torch_manual_v2/HAY_ovo_macro_f1_folds12345_seed42_predictions.csv",
+      "bytes": 1683,
+      "sha256": "9e37d2f97c45885dcbbbe9aebd86f96d87983a24c925fda53e94d66f29bce019"
+    },
+    {
+      "path": "neural_network_torch_manual_v2/HAY_ovr_accuracy_folds12345_seed42.json",
+      "bytes": 147091,
+      "sha256": "40d57883513a6e7fb85d6eded63b04787c21f534a77e28873d009f83106e1a74"
+    },
+    {
+      "path": "neural_network_torch_manual_v2/HAY_ovr_accuracy_folds12345_seed42_predictions.csv",
+      "bytes": 1683,
+      "sha256": "d11cf6ba14b6f0535febaa9543535415550582d978b490b16c2076605b276257"
+    },
+    {
+      "path": "neural_network_torch_manual_v2/HAY_ovr_macro_f1_folds12345_seed42.json",
+      "bytes": 176251,
+      "sha256": "a945bd4b0d781b12e75eda40d00c4c9f3fd3bd6ec710ee89fcc83e32d7f2333a"
+    },
+    {
+      "path": "neural_network_torch_manual_v2/HAY_ovr_macro_f1_folds12345_seed42_predictions.csv",
+      "bytes": 1683,
+      "sha256": "91a833a8297ec0a961f10472489c1d42bb5c936632136963a1cee78eef475fb6"
+    },
+    {
+      "path": "neural_network_torch_manual_v2/HCV_ce_accuracy_folds12345_seed42.json",
+      "bytes": 135994,
+      "sha256": "771242d7704a4131a8345c50544d283d347f9e2c2ef9d6269809eeba02f732d5"
+    },
+    {
+      "path": "neural_network_torch_manual_v2/HCV_ce_accuracy_folds12345_seed42_predictions.csv",
+      "bytes": 6402,
+      "sha256": "ed7cb4959675b6368dafd997483985e98d6664eaab13897ab1e5df119e7fc29c"
+    },
+    {
+      "path": "neural_network_torch_manual_v2/HCV_ce_macro_f1_folds12345_seed42.json",
+      "bytes": 160403,
+      "sha256": "ccba9452eba09fe045d9cd9b2aa14522c9ab24ceaf7d84bece052cf6b91187d0"
+    },
+    {
+      "path": "neural_network_torch_manual_v2/HCV_ce_macro_f1_folds12345_seed42_predictions.csv",
+      "bytes": 6402,
+      "sha256": "8e420a1fb02366124772aedfe3d92e24c5d9f1ddadb328ce73c657732849660d"
+    },
+    {
+      "path": "neural_network_torch_manual_v2/HCV_ovo_accuracy_folds12345_seed42.json",
+      "bytes": 128625,
+      "sha256": "dc57122c91c6c020ad5037a77b255d296931eaa68019abe09a293876343d5cf7"
+    },
+    {
+      "path": "neural_network_torch_manual_v2/HCV_ovo_accuracy_folds12345_seed42_predictions.csv",
+      "bytes": 6402,
+      "sha256": "b505d8dde28a4b74c25a4390ae2ce896056f62821d9d753e9896b573d4ff0ccf"
+    },
+    {
+      "path": "neural_network_torch_manual_v2/HCV_ovo_macro_f1_folds12345_seed42.json",
+      "bytes": 145322,
+      "sha256": "94b24e390e52e8219b3adff54813d48bdcfe0a831f3ed8e21b0df9e029933342"
+    },
+    {
+      "path": "neural_network_torch_manual_v2/HCV_ovo_macro_f1_folds12345_seed42_predictions.csv",
+      "bytes": 6402,
+      "sha256": "6f3cf0a93de41f9730c66c8080b3121d9980650faf8f4c85473327872d8132d0"
+    },
+    {
+      "path": "neural_network_torch_manual_v2/HCV_ovr_accuracy_folds12345_seed42.json",
+      "bytes": 135409,
+      "sha256": "d8afe4efe41b37a472237d1967ecd76e01204a86fd8490265d2785eddfe50f2e"
+    },
+    {
+      "path": "neural_network_torch_manual_v2/HCV_ovr_accuracy_folds12345_seed42_predictions.csv",
+      "bytes": 6402,
+      "sha256": "6fba82d8449ff0ee11621f6078c1a4ae0200a0a9342acb1b6ae6f524ba955f1c"
+    },
+    {
+      "path": "neural_network_torch_manual_v2/HCV_ovr_macro_f1_folds12345_seed42.json",
+      "bytes": 161190,
+      "sha256": "64af9cd6b37a54d33e6a62cf1d57c308367bd5c07f0454bea95bc1349b49c3a7"
+    },
+    {
+      "path": "neural_network_torch_manual_v2/HCV_ovr_macro_f1_folds12345_seed42_predictions.csv",
+      "bytes": 6402,
+      "sha256": "76570dc581931769ae4d834649d03c3af6d3cd4325bd2ec5d7e5657083990211"
+    },
+    {
+      "path": "neural_network_torch_manual_v2/LYM_ce_accuracy_folds12345_seed42.json",
+      "bytes": 136794,
+      "sha256": "dbf15d920816173d8759d399effccd91cbe64f02de5045bfa88acb9768263c0d"
+    },
+    {
+      "path": "neural_network_torch_manual_v2/LYM_ce_accuracy_folds12345_seed42_predictions.csv",
+      "bytes": 1551,
+      "sha256": "70bd34fdb8c29d4889bd7f24f115353c9e0f6d2178a010f60c5d6f515f78d35f"
+    },
+    {
+      "path": "neural_network_torch_manual_v2/LYM_ce_macro_f1_folds12345_seed42.json",
+      "bytes": 159719,
+      "sha256": "9b7b09009dc4cd1460b4db974bf1664aa3faa37ef54a53c2bee9fe2905f00d5f"
+    },
+    {
+      "path": "neural_network_torch_manual_v2/LYM_ce_macro_f1_folds12345_seed42_predictions.csv",
+      "bytes": 1551,
+      "sha256": "34c88b1890481dcf970a6a744bc5fd05ed44c0990af16351f8d15fafb85c15e3"
+    },
+    {
+      "path": "neural_network_torch_manual_v2/LYM_ovo_accuracy_folds12345_seed42.json",
+      "bytes": 141554,
+      "sha256": "1acee13d436367184112b8d6163c6b1974aef5c2f3c2fbec2ebe55f9be6901ff"
+    },
+    {
+      "path": "neural_network_torch_manual_v2/LYM_ovo_accuracy_folds12345_seed42_predictions.csv",
+      "bytes": 1551,
+      "sha256": "75afba2e2b56b23659e349f5b6e7a156be6915ccd9aea542fd22bf32ac71c911"
+    },
+    {
+      "path": "neural_network_torch_manual_v2/LYM_ovo_macro_f1_folds12345_seed42.json",
+      "bytes": 159060,
+      "sha256": "5bb2c836c5766e68f54a1cb1854b423dcc97ab40ecb4a584686c7ae34278eab5"
+    },
+    {
+      "path": "neural_network_torch_manual_v2/LYM_ovo_macro_f1_folds12345_seed42_predictions.csv",
+      "bytes": 1551,
+      "sha256": "25400c1cfb494217d4d0422a88ac9f4bbe00398c0fed0de309689a9b5d008905"
+    },
+    {
+      "path": "neural_network_torch_manual_v2/LYM_ovr_accuracy_folds12345_seed42.json",
+      "bytes": 129177,
+      "sha256": "25c32514a29b43e555132995697aab1890680234b54a9b3f5fdf133a3b0a5ffa"
+    },
+    {
+      "path": "neural_network_torch_manual_v2/LYM_ovr_accuracy_folds12345_seed42_predictions.csv",
+      "bytes": 1551,
+      "sha256": "a8d91f4c4215c2b25eb44b2879927d83bcf7d21f6c9d66224c2e8ee80ddbba77"
+    },
+    {
+      "path": "neural_network_torch_manual_v2/LYM_ovr_macro_f1_folds12345_seed42.json",
+      "bytes": 156200,
+      "sha256": "861df5e7ba7658a0472de400240350aaea046b033efc0c00741afdc8368e2819"
+    },
+    {
+      "path": "neural_network_torch_manual_v2/LYM_ovr_macro_f1_folds12345_seed42_predictions.csv",
+      "bytes": 1551,
+      "sha256": "6ac41155a2cc4f951e98723be3b11b745e0990007d85c6cd83c27bfe2536dbd5"
+    },
+    {
+      "path": "neural_network_torch_manual_v2/NEW_ce_accuracy_folds12345_seed42.json",
+      "bytes": 127580,
+      "sha256": "c55618baca84009720a6523180bb79940bf74f829b7dfafc16eaacde9aea4a10"
+    },
+    {
+      "path": "neural_network_torch_manual_v2/NEW_ce_accuracy_folds12345_seed42_predictions.csv",
+      "bytes": 2288,
+      "sha256": "8b590823e0d3c7f9260ea0720659657a10bc4559dcdc8cd68513db95c3816575"
+    },
+    {
+      "path": "neural_network_torch_manual_v2/NEW_ce_macro_f1_folds12345_seed42.json",
+      "bytes": 129895,
+      "sha256": "95f1daa0b04a21dc5b3bc4ccbb9c523d712f304a2d0e60bae31d3f083804cbaa"
+    },
+    {
+      "path": "neural_network_torch_manual_v2/NEW_ce_macro_f1_folds12345_seed42_predictions.csv",
+      "bytes": 2288,
+      "sha256": "863c284e0d97580c261230a90c7e30461a0fc5e887879ee4518575ec0103d732"
+    },
+    {
+      "path": "neural_network_torch_manual_v2/NEW_ovo_accuracy_folds12345_seed42.json",
+      "bytes": 128149,
+      "sha256": "326d7ca1d2183b82faf24ab6485b15ebf680423783c617c1c4adee9a053fa9be"
+    },
+    {
+      "path": "neural_network_torch_manual_v2/NEW_ovo_accuracy_folds12345_seed42_predictions.csv",
+      "bytes": 2288,
+      "sha256": "cffa87a5b882616ee1d2ac2e86f24186c00d9de3d781eb6e975585b93f31e185"
+    },
+    {
+      "path": "neural_network_torch_manual_v2/NEW_ovo_macro_f1_folds12345_seed42.json",
+      "bytes": 130345,
+      "sha256": "66dbf82eb71aaf84a3254c1c4907d06177adeb2b46c489cb99524e08af1a8df8"
+    },
+    {
+      "path": "neural_network_torch_manual_v2/NEW_ovo_macro_f1_folds12345_seed42_predictions.csv",
+      "bytes": 2288,
+      "sha256": "cffa87a5b882616ee1d2ac2e86f24186c00d9de3d781eb6e975585b93f31e185"
+    },
+    {
+      "path": "neural_network_torch_manual_v2/NEW_ovr_accuracy_folds12345_seed42.json",
+      "bytes": 130287,
+      "sha256": "5fc33556ffed4260b5c4e8bb60a6b3d58671acae550da8d66618bd6ee2fcaa1c"
+    },
+    {
+      "path": "neural_network_torch_manual_v2/NEW_ovr_accuracy_folds12345_seed42_predictions.csv",
+      "bytes": 2288,
+      "sha256": "8b590823e0d3c7f9260ea0720659657a10bc4559dcdc8cd68513db95c3816575"
+    },
+    {
+      "path": "neural_network_torch_manual_v2/NEW_ovr_macro_f1_folds12345_seed42.json",
+      "bytes": 133895,
+      "sha256": "6e90ca35df705c2865d1af8927f2b64a210c26aff79050215766c2f80ed6a80c"
+    },
+    {
+      "path": "neural_network_torch_manual_v2/NEW_ovr_macro_f1_folds12345_seed42_predictions.csv",
+      "bytes": 2288,
+      "sha256": "145e58296ed271489a4da824f7834a7fc7cb206111ebd4d8c9c011543a0b6a5c"
+    },
+    {
+      "path": "neural_network_torch_manual_v2/SEG_ce_accuracy_folds12345_seed42.json",
+      "bytes": 217387,
+      "sha256": "54103413fb1380e4bb74d93dd03cf977484ee1c7805ebe862d0f76ad4dadb470"
+    },
+    {
+      "path": "neural_network_torch_manual_v2/SEG_ce_accuracy_folds12345_seed42_predictions.csv",
+      "bytes": 26643,
+      "sha256": "f097b5dc230510dcfb635adf1cb4148d6198977bad945b6c2e5f282571e6b820"
+    },
+    {
+      "path": "neural_network_torch_manual_v2/SEG_ce_macro_f1_folds12345_seed42.json",
+      "bytes": 221911,
+      "sha256": "996ef6db2ed990f2da564527a2e9a9d59db524a0d9637b3d5af09855e9a72890"
+    },
+    {
+      "path": "neural_network_torch_manual_v2/SEG_ce_macro_f1_folds12345_seed42_predictions.csv",
+      "bytes": 26643,
+      "sha256": "f097b5dc230510dcfb635adf1cb4148d6198977bad945b6c2e5f282571e6b820"
+    },
+    {
+      "path": "neural_network_torch_manual_v2/SEG_ovo_accuracy_folds12345_seed42.json",
+      "bytes": 239630,
+      "sha256": "2eefbc9822e73516f8a0cf4bb6d3d282ce66596369fff08c0aa9328296e8d232"
+    },
+    {
+      "path": "neural_network_torch_manual_v2/SEG_ovo_accuracy_folds12345_seed42_predictions.csv",
+      "bytes": 26643,
+      "sha256": "0e414b710f6bc887c3bd9e5fa3a83ede2d528c67ff4d7a030acdf3b8b9387c02"
+    },
+    {
+      "path": "neural_network_torch_manual_v2/SEG_ovo_macro_f1_folds12345_seed42.json",
+      "bytes": 245057,
+      "sha256": "3b1f0bf39270bf7e63addf8b72d176d1625365ba06dee1cd7eaa0f0ea39b219e"
+    },
+    {
+      "path": "neural_network_torch_manual_v2/SEG_ovo_macro_f1_folds12345_seed42_predictions.csv",
+      "bytes": 26643,
+      "sha256": "d1139b646cc9cb11b66535206fa141ba78f82bf0a38d202feb8545dcde2d1a84"
+    },
+    {
+      "path": "neural_network_torch_manual_v2/SEG_ovr_accuracy_folds12345_seed42.json",
+      "bytes": 211648,
+      "sha256": "11f88d9e3e553a9c0875e5c57ea0cf483f05afcec353ac3a8f7ca4002d41b7ba"
+    },
+    {
+      "path": "neural_network_torch_manual_v2/SEG_ovr_accuracy_folds12345_seed42_predictions.csv",
+      "bytes": 26643,
+      "sha256": "d36e5fb85ee5b3cc2e8d85cc7df75570a56136a21e4050f2ef42154996a1ea25"
+    },
+    {
+      "path": "neural_network_torch_manual_v2/SEG_ovr_macro_f1_folds12345_seed42.json",
+      "bytes": 214181,
+      "sha256": "b97e663b3b07489fc5240e329b8bd75ee12d70dcacc06693943c987981b65cc6"
+    },
+    {
+      "path": "neural_network_torch_manual_v2/SEG_ovr_macro_f1_folds12345_seed42_predictions.csv",
+      "bytes": 26643,
+      "sha256": "5411f9865f2b6ffb254b79ec78a1c1a9f368faf2fcf1d15025a41708f7d511ac"
+    },
+    {
+      "path": "neural_network_torch_manual_v2/SHU_ce_accuracy_folds12345_seed42.json",
+      "bytes": 163534,
+      "sha256": "ae41a3141a89df2de84f70ec13e157ffd15e74b8c20e62e61a427019fc82d30f"
+    },
+    {
+      "path": "neural_network_torch_manual_v2/SHU_ce_accuracy_folds12345_seed42_predictions.csv",
+      "bytes": 25023,
+      "sha256": "d30781f20f752c0282c6df126d7c2401b03863d30dd036415da7bdcba6e6f090"
+    },
+    {
+      "path": "neural_network_torch_manual_v2/SHU_ce_macro_f1_folds12345_seed42.json",
+      "bytes": 168202,
+      "sha256": "ab875e4879fd7cac8391d77a771ab28428abdb18b1ae9b725946a8199c2f74ce"
+    },
+    {
+      "path": "neural_network_torch_manual_v2/SHU_ce_macro_f1_folds12345_seed42_predictions.csv",
+      "bytes": 25023,
+      "sha256": "c828be11dc7eef1fdef71a13f609329f7d68607e69269c3ff31c596dee669e4e"
+    },
+    {
+      "path": "neural_network_torch_manual_v2/SHU_ovo_accuracy_folds12345_seed42.json",
+      "bytes": 174386,
+      "sha256": "16bb18ce12a2e718559ba6a5e1a1ac498b95a5bed578f299496d32304946ab5f"
+    },
+    {
+      "path": "neural_network_torch_manual_v2/SHU_ovo_accuracy_folds12345_seed42_predictions.csv",
+      "bytes": 25023,
+      "sha256": "6d9f56f671467a2dafc90d88c7a680887046247cf60d6debb414e558f412ba20"
+    },
+    {
+      "path": "neural_network_torch_manual_v2/SHU_ovo_macro_f1_folds12345_seed42.json",
+      "bytes": 178811,
+      "sha256": "2b4fa3f4cc978ca4caf4b36640c26473f9de27eeeb0aecd603adf45116436da8"
+    },
+    {
+      "path": "neural_network_torch_manual_v2/SHU_ovo_macro_f1_folds12345_seed42_predictions.csv",
+      "bytes": 25023,
+      "sha256": "e72ddb970d0670066d1922f7fe18a7a65a4cfc01135adec2a5c8e5e44ab55f0d"
+    },
+    {
+      "path": "neural_network_torch_manual_v2/SHU_ovr_accuracy_folds12345_seed42.json",
+      "bytes": 157243,
+      "sha256": "594d43d29ead49da942f54107ed1a157b09b22adc0d684772d487a31dbfacc96"
+    },
+    {
+      "path": "neural_network_torch_manual_v2/SHU_ovr_accuracy_folds12345_seed42_predictions.csv",
+      "bytes": 25023,
+      "sha256": "6772d9004e49aa920ecb8ff9448d4838a195944330dd151d2a057eef3d541c52"
+    },
+    {
+      "path": "neural_network_torch_manual_v2/SHU_ovr_macro_f1_folds12345_seed42.json",
+      "bytes": 165620,
+      "sha256": "88f288530ad9c41be18894b2d6090c6813bd37e5e37bafdf6273e6da5488cf07"
+    },
+    {
+      "path": "neural_network_torch_manual_v2/SHU_ovr_macro_f1_folds12345_seed42_predictions.csv",
+      "bytes": 25023,
+      "sha256": "0de93061fa7f9c34d4d2e0665a43d69e095d27f82b9ea5f3155650d340e65e17"
+    },
+    {
+      "path": "neural_network_torch_manual_v2/THY_ce_accuracy_folds12345_seed42.json",
+      "bytes": 104168,
+      "sha256": "5443e4b7cceffe1365598b5c22993f31a814461c88183ba3d9abe1b7c169dd89"
+    },
+    {
+      "path": "neural_network_torch_manual_v2/THY_ce_accuracy_folds12345_seed42_predictions.csv",
+      "bytes": 7843,
+      "sha256": "1776232eb40ae09e772e8586cd75e20839668c3bb359ceea984dd6c2502a1e5e"
+    },
+    {
+      "path": "neural_network_torch_manual_v2/THY_ce_macro_f1_folds12345_seed42.json",
+      "bytes": 129930,
+      "sha256": "ac6596b22e3f06dd6968a3443e57f25dcbdca98e221cf6563f967f35e8a95576"
+    },
+    {
+      "path": "neural_network_torch_manual_v2/THY_ce_macro_f1_folds12345_seed42_predictions.csv",
+      "bytes": 7843,
+      "sha256": "955d3fb8e2b6bf8ee1890723ab19377a70dd199bd69ca7a30587bcd1e8306985"
+    },
+    {
+      "path": "neural_network_torch_manual_v2/THY_ovo_accuracy_folds12345_seed42.json",
+      "bytes": 92230,
+      "sha256": "87e3f39d2fed51190eb08a40872bfd90c0f5ea403e3385dc5eab795b890cf5ef"
+    },
+    {
+      "path": "neural_network_torch_manual_v2/THY_ovo_accuracy_folds12345_seed42_predictions.csv",
+      "bytes": 7843,
+      "sha256": "3a0947a368c95530ed91d237d27d4f01db9afdd0d9109c58f55efedca9f41765"
+    },
+    {
+      "path": "neural_network_torch_manual_v2/THY_ovo_macro_f1_folds12345_seed42.json",
+      "bytes": 135288,
+      "sha256": "da1f72f076a24ee638c7f4850ec85328a9a06e51b5680d0f38859d50586087bd"
+    },
+    {
+      "path": "neural_network_torch_manual_v2/THY_ovo_macro_f1_folds12345_seed42_predictions.csv",
+      "bytes": 7843,
+      "sha256": "d8961e2904cb4d3fcf405c2de1f67f12e64f989a0b0b448726e0da5b3a78d7c4"
+    },
+    {
+      "path": "neural_network_torch_manual_v2/THY_ovr_accuracy_folds12345_seed42.json",
+      "bytes": 114364,
+      "sha256": "be81c2cc10366daa8b3785364ac883b80e913a7b483f54f0a3b9b28d4a1ee1aa"
+    },
+    {
+      "path": "neural_network_torch_manual_v2/THY_ovr_accuracy_folds12345_seed42_predictions.csv",
+      "bytes": 7843,
+      "sha256": "753b826aeb947e86c8cb8000eb72c196918004a5f12e71c925fd56c4b53c1b7a"
+    },
+    {
+      "path": "neural_network_torch_manual_v2/THY_ovr_macro_f1_folds12345_seed42.json",
+      "bytes": 138164,
+      "sha256": "4005d0ae8c5a11d045b3b550938cdce679eb44bfe28c85abe9cf798a164c4f50"
+    },
+    {
+      "path": "neural_network_torch_manual_v2/THY_ovr_macro_f1_folds12345_seed42_predictions.csv",
+      "bytes": 7843,
+      "sha256": "26415876acaf2dda469aafb083cbd0ea9ccaca2612f447fced1ae9e040897531"
+    },
+    {
+      "path": "neural_network_torch_manual_v2/VEH_ce_accuracy_folds12345_seed42.json",
+      "bytes": 209207,
+      "sha256": "82505ca713681d3e7a748233d8e001ae292533b457240e1f3686b049c2e63d1a"
+    },
+    {
+      "path": "neural_network_torch_manual_v2/VEH_ce_accuracy_folds12345_seed42_predictions.csv",
+      "bytes": 9229,
+      "sha256": "66c99288f2d94a0bce639f727d33ec661775a0b3286e1b3ff920a47979cfd5f8"
+    },
+    {
+      "path": "neural_network_torch_manual_v2/VEH_ce_macro_f1_folds12345_seed42.json",
+      "bytes": 211271,
+      "sha256": "5689f339a295d17115551f4de56a6e586c8ff2f565a77a3e4dba005d9c91fca9"
+    },
+    {
+      "path": "neural_network_torch_manual_v2/VEH_ce_macro_f1_folds12345_seed42_predictions.csv",
+      "bytes": 9229,
+      "sha256": "fcf1f54e7446785c247b53eaf191093a0bb99232f08365cf77e21a063e745d60"
+    },
+    {
+      "path": "neural_network_torch_manual_v2/VEH_ovo_accuracy_folds12345_seed42.json",
+      "bytes": 198333,
+      "sha256": "2b0656e348dd5ff5f05bb430f3272fa5b355198d01d7b28758a8998b293b8768"
+    },
+    {
+      "path": "neural_network_torch_manual_v2/VEH_ovo_accuracy_folds12345_seed42_predictions.csv",
+      "bytes": 9229,
+      "sha256": "2279515ac67a8dd605adeef19815de185e054942031f1b0b28431d5e3e757a36"
+    },
+    {
+      "path": "neural_network_torch_manual_v2/VEH_ovo_macro_f1_folds12345_seed42.json",
+      "bytes": 216602,
+      "sha256": "9bd03dc1ace7568accf00c3198b76aeccaa4684df3d7555e8b2e70189a83d7e6"
+    },
+    {
+      "path": "neural_network_torch_manual_v2/VEH_ovo_macro_f1_folds12345_seed42_predictions.csv",
+      "bytes": 9229,
+      "sha256": "279c7ff4c3cb54eeac43c2cdec06f01b41f12b198b8d0ff183532492838e8dbe"
+    },
+    {
+      "path": "neural_network_torch_manual_v2/VEH_ovr_accuracy_folds12345_seed42.json",
+      "bytes": 200618,
+      "sha256": "42c229f59b6e4f816a86437a7668086c26948230081453c40e7485d86b186843"
+    },
+    {
+      "path": "neural_network_torch_manual_v2/VEH_ovr_accuracy_folds12345_seed42_predictions.csv",
+      "bytes": 9229,
+      "sha256": "abfabdafe7f315715813eaab2113c46eee1ac53b5b4cc56decd64f22aec99849"
+    },
+    {
+      "path": "neural_network_torch_manual_v2/VEH_ovr_macro_f1_folds12345_seed42.json",
+      "bytes": 217062,
+      "sha256": "eb890fc77e68c2047a2b3474a77dfe7733bb3643b6775e662f925a1c904da414"
+    },
+    {
+      "path": "neural_network_torch_manual_v2/VEH_ovr_macro_f1_folds12345_seed42_predictions.csv",
+      "bytes": 9229,
+      "sha256": "474dbdec7255ed0e96d0b04d912e559f6e1dbb6e72fac6981aca713a30be13c8"
+    },
+    {
+      "path": "neural_network_torch_manual_v2/ZOO_ce_accuracy_folds12345_seed42.json",
+      "bytes": 137939,
+      "sha256": "d76b24b336aed7ad6ccce9d43aba77f544daf31fd25d085b6b0a18914d8295f6"
+    },
+    {
+      "path": "neural_network_torch_manual_v2/ZOO_ce_accuracy_folds12345_seed42_predictions.csv",
+      "bytes": 1034,
+      "sha256": "d5a8a79f03d3ac7ba7deb573f2dcdd1421340c3809a69be12f16f7dc62fc3b6f"
+    },
+    {
+      "path": "neural_network_torch_manual_v2/ZOO_ce_macro_f1_folds12345_seed42.json",
+      "bytes": 147253,
+      "sha256": "70514238ccacf8e6fe8944472927499e60200eb93f7cbf92b505bc392ec72b50"
+    },
+    {
+      "path": "neural_network_torch_manual_v2/ZOO_ce_macro_f1_folds12345_seed42_predictions.csv",
+      "bytes": 1034,
+      "sha256": "d5a8a79f03d3ac7ba7deb573f2dcdd1421340c3809a69be12f16f7dc62fc3b6f"
+    },
+    {
+      "path": "neural_network_torch_manual_v2/ZOO_ovo_accuracy_folds12345_seed42.json",
+      "bytes": 136990,
+      "sha256": "03d6e64e67e18238d80fc1f1e5b0b94b9c8cc3899760b11033621c35852ceb37"
+    },
+    {
+      "path": "neural_network_torch_manual_v2/ZOO_ovo_accuracy_folds12345_seed42_predictions.csv",
+      "bytes": 1034,
+      "sha256": "d5a8a79f03d3ac7ba7deb573f2dcdd1421340c3809a69be12f16f7dc62fc3b6f"
+    },
+    {
+      "path": "neural_network_torch_manual_v2/ZOO_ovo_macro_f1_folds12345_seed42.json",
+      "bytes": 146103,
+      "sha256": "651b73440261bab871293e2c6cf2cf51fa49ea6183c604c7ff39bed8e244db12"
+    },
+    {
+      "path": "neural_network_torch_manual_v2/ZOO_ovo_macro_f1_folds12345_seed42_predictions.csv",
+      "bytes": 1034,
+      "sha256": "d5a8a79f03d3ac7ba7deb573f2dcdd1421340c3809a69be12f16f7dc62fc3b6f"
+    },
+    {
+      "path": "neural_network_torch_manual_v2/ZOO_ovr_accuracy_folds12345_seed42.json",
+      "bytes": 140490,
+      "sha256": "3e55d8738413bccb9bdf212ec82435beb382099bbfb58189523a7ebebc4efe22"
+    },
+    {
+      "path": "neural_network_torch_manual_v2/ZOO_ovr_accuracy_folds12345_seed42_predictions.csv",
+      "bytes": 1034,
+      "sha256": "d5a8a79f03d3ac7ba7deb573f2dcdd1421340c3809a69be12f16f7dc62fc3b6f"
+    },
+    {
+      "path": "neural_network_torch_manual_v2/ZOO_ovr_macro_f1_folds12345_seed42.json",
+      "bytes": 149259,
+      "sha256": "49f94ded3e45ff77f197ff52e364eaca1cf4d601d823ab7736cd8835508ace53"
+    },
+    {
+      "path": "neural_network_torch_manual_v2/ZOO_ovr_macro_f1_folds12345_seed42_predictions.csv",
+      "bytes": 1034,
+      "sha256": "d5a8a79f03d3ac7ba7deb573f2dcdd1421340c3809a69be12f16f7dc62fc3b6f"
+    }
+  ]
+}
