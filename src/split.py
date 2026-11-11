@@ -10,7 +10,7 @@ def get_outer_folds(
     y: np.ndarray,
     metadata: Optional[dict] = None,
     n_splits: int = 5,
-    seed: int = 42
+    seed: int = 67
 ):
     # If predefined folds are available in the metadata, they are returned; otherwise, new stratified folds are generated using StratifiedKFold.
 
@@ -26,7 +26,7 @@ def get_inner_subsets(
     train_val_idx: np.ndarray,
     y: np.ndarray,
     n_subsets: int = 5,
-    seed: int = 42
+    seed: int = 67
 ):
     # Generates inner subsets for cross-validation within the training/validation set, using StratifiedKFold to maintain class distribution.
 
