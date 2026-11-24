@@ -5,7 +5,7 @@ feature/SVM, feature/neural, feature/neural-author-code;
 
 # Kernel SVM
 
-The Kernel SVM reproduction code of this project is located in the directory `src/kernel-svm` in the branch `feature/svm`. Checkout the branch to access it.
+The Kernel SVM reproduction code of this project is located in the branch `feature/svm`. Checkout the branch to access it. The source files are in the directory `src/kernel-svm`.
 
 ```powershell
 git checkout feature/svm
@@ -48,13 +48,14 @@ pip install -r src/kernel-svm/requirements.txt
 ### 4. Train the SVM models
 
 ```bash
-python -m src.kernel-svm.svm
+cd src
+python -m kernel-svm.svm
 ```
 
 ### 5. Generate results
 
 ```bash
-python -m src.kernel-svm.generate_result
+python -m kernel-svm.generate_result
 ```
 
 # Neural Network Reproduction
