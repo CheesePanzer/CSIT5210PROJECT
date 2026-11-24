@@ -1,7 +1,61 @@
 # README
+
 Notably, the SVM code and the neural network code are in different branches or this repository:
 feature/SVM, feature/neural, feature/neural-author-code;
 
+# Kernel SVM
+
+The Kernel SVM reproduction code of this project is located in the directory `src/kernel-svm` in the branch `feature/svm`. Checkout the branch to access it.
+
+```powershell
+git checkout feature/svm
+```
+
+## Platform requirements and dependencies
+
+The kernel SVM experiments were performed in Windows 11 with Python 3.12.6.
+
+### 1. Create a virtual environment for the project
+
+```powershell
+python -m venv .venv
+```
+
+You can also create a virtual environment using Visual Studio Code. Press Ctrl + Shift + P, select the "Python: Create Environment" command, then "Venv", then select your installed Python version.
+
+### 2. Activate the virtual environment
+
+For Windows:
+
+```powershell
+.venv\Scripts\Activate
+```
+
+For macOS/Linux:
+
+```bash
+source .venv/bin/activate
+```
+
+This is automatically performed if you are using VSCode's integrated terminal.
+
+### 3. Install required packages
+
+```bash
+pip install -r src/kernel-svm/requirements.txt
+```
+
+### 4. Train the SVM models
+
+```bash
+python -m src.kernel-svm.svm
+```
+
+### 5. Generate results
+
+```bash
+python -m src.kernel-svm.generate_result
+```
 
 # Neural Network Reproduction
 
