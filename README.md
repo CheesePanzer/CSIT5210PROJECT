@@ -9,7 +9,7 @@ This directory src/network contains the neural-network reproduction code for the
 
 ## Requirements
 
-The code was tested on Windows and Linux with Python 3.11, PyTorch, NumPy, pandas, SciPy, and scikit-learn. Create a virtual environment locally; do not commit the virtual environment or machine-specific paths.
+The code was tested on Windows and Linux with Python 3.11, PyTorch, NumPy, pandas, SciPy, and scikit-learn
 Dependencies are provided at:
 
 ```text
@@ -28,7 +28,6 @@ python -m pip install -r src/network/requirements_pytorch.txt
 network_train_torch_manual.py   Main PyTorch training pipeline
 paper_losses.py                 CE, OVR, and OVO loss functions
 split_metadata.py               Split and dataset fingerprint metadata
-tools/evaluate_predictions.py   Evaluate saved prediction CSV files
 ```
 
 ## Data
