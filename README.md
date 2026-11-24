@@ -38,8 +38,6 @@ The training script expects the datasets under:
 data/raw/
 ```
 
-You can use `--data-dir` to provide another local data directory. Do not commit local absolute paths or virtual environments.
-
 ## Running the Experiments
 
 The two OVO implementations are maintained on separate branches:
@@ -87,8 +85,8 @@ For example, with this layout:
 
 ```text
 results/
-├── paper_formula/
-└── author_code/
+    paper_formula/
+    author_code/
 ```
 
 run:
